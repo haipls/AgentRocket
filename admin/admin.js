@@ -370,9 +370,14 @@ async function saveCurrent(event) {
     const view = views[state.tab];
     const data = formDataObject(els.form);
     const isEdit = Boolean(state.editing);
+    const previousStatus = state.editing && state.editing.order_status;
     if (isEdit) data.id = state.editing.id;
     await api(isEdit ? 'update' : 'create', view.resource, data);
-    if (!isEdit && view.resource === 'orders') {
+    const shouldSendOrderConfirmation = view.resource === 'orders'
+        && data.order_status === 'paid'
+        && (!isEdit || previousStatus !== 'paid');
+
+    if (shouldSendOrderConfirmation) {
         sendAdminOrderConfirmation(data).catch(error => {
             console.error('[Admin Order Confirmation Email Error]', error);
         });
