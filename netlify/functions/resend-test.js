@@ -11,8 +11,9 @@ exports.handler = async (event) => {
 
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const testToEmail = process.env.RESEND_TEST_TO_EMAIL;
 
-  if (!apiKey || !fromEmail) {
+  if (!apiKey || !fromEmail || !testToEmail) {
     return {
       statusCode: 500,
       headers: { "content-type": "application/json; charset=utf-8" },
@@ -26,7 +27,7 @@ exports.handler = async (event) => {
   try {
     const { data, error } = await resend.emails.send({
       from: `AgentRocket <${fromEmail}>`,
-      to: [fromEmail],
+      to: [testToEmail],
       subject: "AgentRocket Resend test",
       html: `<p>Email test từ AgentRocket đã gửi thành công qua Resend.</p><p>Thời điểm: ${sentAt}</p>`,
       text: `Email test từ AgentRocket đã gửi thành công qua Resend.\nThời điểm: ${sentAt}`,
