@@ -378,9 +378,12 @@ async function saveCurrent(event) {
         && (!isEdit || previousStatus !== 'paid');
 
     if (shouldSendOrderConfirmation) {
-        sendAdminOrderConfirmation(data).catch(error => {
-            console.error('[Admin Order Confirmation Email Error]', error);
-        });
+        const emailResult = await sendAdminOrderConfirmation(data);
+        if (emailResult.skipped) {
+            alert('Đơn đã lưu, nhưng chưa gửi email vì khách hàng không có email hợp lệ trong trường Zalo.');
+        } else {
+            alert('Đã gửi email xác nhận đơn hàng cho khách.');
+        }
     }
     closeModal();
     await loadAll();
