@@ -550,7 +550,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then((result) => {
                         trackEvent('lead_confirmation_email_sent', {
                             leadId,
-                            emailId: result.id,
+                            emailCount: Array.isArray(result.emails) ? result.emails.length : 0,
+                            testMode: result.testMode || false,
                             skipped: result.skipped || false
                         });
                     })
