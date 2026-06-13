@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán Agent Rocket Sales - Done For You</title>
+    <meta name="description" content="Thanh toán gói Agent Rocket Sales - Done For You sau buổi phỏng vấn và tư vấn triển khai hệ thống bán hàng tự động.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+
+        .payment-page {
+            min-height: 100vh;
+            padding: 32px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-shell {
+            width: 100%;
+            max-width: 1080px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 420px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .payment-panel {
+            background: #ffffff;
+            border: 1px solid #dbe4f0;
+            border-radius: 8px;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+            padding: 28px;
+        }
+
+        .payment-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .payment-brand span {
+            color: #0b74d1;
+        }
+
+        .payment-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            color: #0b74d1;
+            background: #eaf4ff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .payment-title {
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .payment-desc {
+            color: #526178;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .package-box {
+            border: 1px solid #dbe4f0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 20px;
+            background: #f8fbff;
+        }
+
+        .package-box h2 {
+            color: #0f172a;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .package-price {
+            color: #0b74d1;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .package-note {
+            color: #526178;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .deliverables {
+            display: grid;
+            gap: 12px;
+        }
+
+        .deliverable {
+            display: flex;
+            gap: 10px;
+            color: #263244;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .deliverable i {
+            color: #12a150;
+            margin-top: 4px;
+        }
+
+        .qr-panel {
+            position: sticky;
+            top: 24px;
+        }
+
+        .qr-box {
+            border: 1px solid #dbe4f0;
+            border-radius: 8px;
+            padding: 18px;
+            background: #f8fbff;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .qr-box img {
+            width: min(100%, 320px);
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .qr-warning {
+            display: none;
+            padding: 14px;
+            border: 1px solid #f5c2c7;
+            border-radius: 8px;
+            background: #fff5f5;
+            color: #9f1239;
+            line-height: 1.55;
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .payment-detail-list {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid #e7edf5;
+            padding-bottom: 10px;
+            color: #526178;
+            font-size: 0.9rem;
+        }
+
+        .payment-detail strong {
+            color: #0f172a;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .copy-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .copy-row input {
+            width: 100%;
+            border: 1px solid #dbe4f0;
+            border-radius: 6px;
+            padding: 11px 12px;
+            color: #0f172a;
+            background: #ffffff;
+            font: inherit;
+        }
+
+        .copy-row button {
+            border: 0;
+            border-radius: 6px;
+            padding: 0 14px;
+            color: #ffffff;
+            background: #0b74d1;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .payment-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .payment-actions .btn {
+            justify-content: center;
+        }
+
+        .payment-footnote {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .payment-page {
+                align-items: stretch;
+                padding: 16px;
+            }
+
+            .payment-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-panel {
+                padding: 22px;
+            }
+
+            .payment-title {
+                font-size: 1.55rem;
+            }
+
+            .qr-panel {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="payment-page">
+        <div class="payment-shell">
+            <section class="payment-panel">
+                <a class="payment-brand" href="../index.html">
+                    <span>Agent</span>Rocket AI
+                </a>
+                <div class="payment-kicker">
+                    <i class="fa-solid fa-rocket"></i>
+                    Agent Rocket Sales - Done For You
+                </div>
+                <h1 class="payment-title">Agent Rocket Sales - Done For You</h1>
+                <p class="payment-desc">
+                    Dành cho doanh nghiệp đã nói chuyện xong và đã chốt phạm vi làm flow đầu tiên.
+                    Bên mình cấu hình giúp hệ thống sales tự động ở mức vừa đủ để chạy thật.
+                </p>
+
+                <div class="package-box">
+                    <h2>Agent Rocket Sales - Done For You</h2>
+                    <div class="package-price" id="package-price">12.000.000đ</div>
+                    <p class="package-note">
+                        Phí một lần cho phần cấu hình ban đầu. Chi phí công cụ, tin nhắn hoặc API nếu có sẽ tính riêng theo thực tế dùng.
+                    </p>
+                </div>
+
+                <div class="deliverables">
+                    <div class="deliverable">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Chốt flow sales đầu tiên: lead vào đâu, ai xử lý, hỏi gì, lưu ở đâu và follow-up khi nào.</span>
+                    </div>
+                    <div class="deliverable">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Cấu hình phần tự động hóa có thể chạy ngay, không làm lan man nhiều nhánh.</span>
+                    </div>
+                    <div class="deliverable">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Thiết lập luồng nhận lead, hỏi thông tin, phân loại, lưu dữ liệu và nhắc follow-up.</span>
+                    </div>
+                    <div class="deliverable">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Kiểm tra vận hành và hướng dẫn để chủ doanh nghiệp hiểu hệ thống đang chạy ra sao.</span>
+                    </div>
+                    <div class="deliverable">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Gợi ý bước mở rộng sau khi flow đầu tiên chạy ổn.</span>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="payment-panel qr-panel">
+                <div class="qr-warning" id="qr-warning">
+                    Chưa cấu hình số tài khoản hoặc tên chủ tài khoản VietinBank. Vui lòng kiểm tra phần cấu hình của file này.
+                </div>
+
+                <form class="buyer-form" id="buyer-form">
+                    <label class="form-group" for="buyer-name">
+                        <span>Họ và tên</span>
+                        <input id="buyer-name" name="name" type="text" autocomplete="name" required placeholder="Nguyễn Văn A">
+                    </label>
+
+                    <label class="form-group" for="buyer-email">
+                        <span>Email</span>
+                        <input id="buyer-email" name="email" type="email" autocomplete="email" required placeholder="email@example.com">
+                    </label>
+
+                    <label class="form-group" for="buyer-phone">
+                        <span>Số điện thoại / Zalo</span>
+                        <input id="buyer-phone" name="phone" type="tel" autocomplete="tel" required placeholder="09xxxxxxxx">
+                    </label>
+
+                    <button class="btn btn-primary btn-block" type="submit" id="create-payment">
+                        Thanh toán
+                    </button>
+                </form>
+
+                <button class="btn btn-secondary btn-block" type="button" id="edit-buyer" hidden>
+                    Cập nhật
+                </button>
+
+                <div class="payment-area" id="payment-area">
+                    <div class="qr-box" id="qr-box">
+                        <img id="payment-qr" alt="Mã QR thanh toán VietQR qua VietinBank">
+                    </div>
+
+                    <div class="payment-detail-list">
+                        <div class="payment-detail">
+                            <span>Ngân hàng</span>
+                            <strong>VietinBank</strong>
+                        </div>
+                        <div class="payment-detail">
+                            <span>Chủ tài khoản</span>
+                            <strong id="account-holder">Chưa cấu hình</strong>
+                        </div>
+                        <div class="payment-detail">
+                            <span>Số tài khoản</span>
+                            <strong id="account-number">Chưa cấu hình</strong>
+                        </div>
+                        <div class="payment-detail">
+                            <span>Số tiền</span>
+                            <strong id="payment-amount">12.000.000đ</strong>
+                        </div>
+                    </div>
+
+                    <label class="form-group" for="payment-content">
+                        <span>Nội dung chuyển khoản</span>
+                    </label>
+                    <div class="copy-row">
+                        <input id="payment-content" readonly>
+                        <button type="button" id="copy-content">Copy</button>
+                    </div>
+
+                    <div class="payment-status" id="payment-status">
+                        Đã tạo mã thanh toán. Vui lòng chuyển khoản đúng số tiền và nội dung ở trên.
+                    </div>
+                </div>
+
+                <div class="payment-actions">
+                    <a class="btn btn-primary btn-block" href="../index.html#audit-form">
+                        Quay lại
+                    </a>
+                </div>
+
+                <p class="payment-footnote">
+                    Chỉ thanh toán sau khi đã chốt phạm vi làm. Sau khi chuyển khoản, giữ lại ảnh giao dịch để đối soát nhanh qua Zalo hoặc email.
+                </p>
+            </aside>
+        </div>
+    </main>
+
+    <script src="../assets/js/payment-config.js"></script>
+    <script src="../assets/js/payment-sync.js"></script>
+    <script>
+        const PAYMENT_CONFIG = {
+            bankCode: 'vietinbank',
+            accountNumber: '108000639684',
+            accountHolder: 'PHUNG LE SON HAI',
+            amount: 12000000,
+            transferPrefix: 'SEVQR ARSDFY',
+            productCode: 'ARSDFY',
+            productName: 'Agent Rocket Sales - Done For You',
+            productType: 'service'
+        };
+        const BUYER_STORAGE_KEY = `agentrocket_buyer_${PAYMENT_CONFIG.productCode}`;
+        let currentPayment = null;
+
+        function formatVND(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
+        }
+
+        function buildTransferContent() {
+            return currentPayment ? currentPayment.transferContent : '';
+        }
+
+        function renderPayment() {
+            const qrImage = document.getElementById('payment-qr');
+            const qrBox = document.getElementById('qr-box');
+            const warning = document.getElementById('qr-warning');
+            const accountHolder = document.getElementById('account-holder');
+            const accountNumber = document.getElementById('account-number');
+            const paymentAmount = document.getElementById('payment-amount');
+            const packagePrice = document.getElementById('package-price');
+            const paymentContent = document.getElementById('payment-content');
+
+            const transferContent = buildTransferContent();
+            const isConfigured = PAYMENT_CONFIG.accountNumber && PAYMENT_CONFIG.accountHolder;
+
+            accountHolder.textContent = PAYMENT_CONFIG.accountHolder || 'Chưa cấu hình';
+            accountNumber.textContent = PAYMENT_CONFIG.accountNumber || 'Chưa cấu hình';
+            paymentAmount.textContent = formatVND(PAYMENT_CONFIG.amount);
+            packagePrice.textContent = formatVND(PAYMENT_CONFIG.amount);
+            paymentContent.value = transferContent;
+
+            if (!isConfigured) {
+                warning.style.display = 'block';
+                qrBox.style.display = 'none';
+                return;
+            }
+
+            const qrUrl = new URL('https://qr.sepay.vn/img');
+            qrUrl.searchParams.set('acc', PAYMENT_CONFIG.accountNumber);
+            qrUrl.searchParams.set('bank', PAYMENT_CONFIG.bankCode);
+            qrUrl.searchParams.set('amount', String(PAYMENT_CONFIG.amount));
+            qrUrl.searchParams.set('des', transferContent);
+            qrUrl.searchParams.set('template', 'compact');
+            qrUrl.searchParams.set('showinfo', 'true');
+            qrUrl.searchParams.set('holder', PAYMENT_CONFIG.accountHolder);
+
+            qrImage.src = qrUrl.toString();
+        }
+
+        function getBuyerFromForm() {
+            return {
+                name: document.getElementById('buyer-name').value.trim(),
+                phone: document.getElementById('buyer-phone').value.trim(),
+                zalo: document.getElementById('buyer-email').value.trim()
+            };
+        }
+
+        function restoreBuyerForm() {
+            try {
+                const buyer = JSON.parse(window.localStorage.getItem(BUYER_STORAGE_KEY) || '{}');
+                if (!buyer || typeof buyer !== 'object') return;
+
+                document.getElementById('buyer-name').value = buyer.name || '';
+                document.getElementById('buyer-email').value = buyer.zalo || '';
+                document.getElementById('buyer-phone').value = buyer.phone || '';
+            } catch (error) {
+                window.localStorage.removeItem(BUYER_STORAGE_KEY);
+            }
+        }
+
+        function updatePaymentStatus(message) {
+            document.getElementById('payment-status').textContent = message;
+        }
+
+        function lockBuyerForm() {
+            document.getElementById('buyer-form').style.display = 'none';
+            document.getElementById('edit-buyer').hidden = false;
+        }
+
+        function unlockBuyerForm() {
+            document.getElementById('buyer-form').style.display = 'grid';
+            document.getElementById('edit-buyer').hidden = true;
+            document.getElementById('buyer-name').focus();
+        }
+
+        function startPaymentSession(buyer) {
+            window.localStorage.setItem(BUYER_STORAGE_KEY, JSON.stringify(buyer));
+            currentPayment = window.AgentRocketPaymentSync.setupPaymentPage({
+                ...PAYMENT_CONFIG,
+                customer: buyer,
+                orderStorageKeySuffix: buyer.phone || buyer.zalo
+            });
+
+            document.getElementById('payment-area').style.display = 'block';
+            updatePaymentStatus('Đang tạo đơn thanh toán...');
+            renderPayment();
+
+            return currentPayment.syncPending();
+        }
+
+        document.getElementById('copy-content').addEventListener('click', async () => {
+            const input = document.getElementById('payment-content');
+            input.select();
+
+            try {
+                await navigator.clipboard.writeText(input.value);
+            } catch (error) {
+                document.execCommand('copy');
+            }
+        });
+
+        document.getElementById('buyer-form').addEventListener('submit', async event => {
+            event.preventDefault();
+
+            const form = event.currentTarget;
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const submitButton = document.getElementById('create-payment');
+            const buyer = getBuyerFromForm();
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Đang tạo mã...';
+
+            const response = await startPaymentSession(buyer);
+            if (response.skipped) {
+                updatePaymentStatus('Chưa cấu hình Apps Script URL nên chưa thể tạo đơn thanh toán.');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Thanh toán';
+                return;
+            }
+
+            if (!response.ok) {
+                updatePaymentStatus('Chưa tạo được đơn thanh toán. Vui lòng tải lại trang rồi thử lại.');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Thanh toán';
+                return;
+            }
+
+            updatePaymentStatus('Đã tạo mã thanh toán. Vui lòng chuyển khoản đúng số tiền và nội dung ở trên.');
+            lockBuyerForm();
+            submitButton.disabled = false;
+            submitButton.textContent = 'Thanh toán';
+        });
+
+        document.getElementById('edit-buyer').addEventListener('click', unlockBuyerForm);
+
+        restoreBuyerForm();
+    </script>
+</body>
+</html>

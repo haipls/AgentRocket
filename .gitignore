@@ -1,0 +1,7 @@
+resend_config.txt
+.env
+.env.*
+node_modules/
+.netlify/
+dist/
+build/

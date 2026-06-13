@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - AgentRocket AI</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+    <main class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="eyebrow">AgentRocket AI</p>
+                <h1>Admin Panel</h1>
+            </div>
+            <p class="admin-note">Dữ liệu lấy trực tiếp từ Google Sheets qua Apps Script.</p>
+        </header>
+
+        <nav class="tabs" aria-label="Admin tabs">
+            <button class="tab active" data-tab="products">Sản phẩm</button>
+            <button class="tab" data-tab="customers">Khách hàng</button>
+            <button class="tab" data-tab="orders">Đơn hàng</button>
+        </nav>
+
+        <section class="toolbar">
+            <div>
+                <h2 id="view-title">Sản phẩm</h2>
+                <p id="view-desc">Quản lý sản phẩm vật lý, sản phẩm số và dịch vụ.</p>
+            </div>
+            <button class="primary-btn" id="add-btn">Thêm mới</button>
+        </section>
+
+        <section class="table-wrap">
+            <table>
+                <thead id="table-head"></thead>
+                <tbody id="table-body"></tbody>
+            </table>
+            <div class="empty-state" id="empty-state" hidden>Chưa có dữ liệu.</div>
+        </section>
+    </main>
+
+    <div class="modal" id="modal" hidden>
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3 id="modal-title">Thêm mới</h3>
+                <button class="icon-btn" id="close-modal" aria-label="Đóng">×</button>
+            </div>
+            <form id="entity-form" class="entity-form"></form>
+        </div>
+    </div>
+
+    <script src="/admin/admin-config.js"></script>
+    <script src="/admin/admin.js"></script>
+</body>
+</html>

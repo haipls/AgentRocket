@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentRocket AI - Giúp SME tự xây hệ thống AI Agent quản lý Lead, Sales và Follow-up</title>
+    <meta name="description" content="AgentRocket AI giúp chủ SME tự xây hệ thống AI Agent quản lý lead, sales và follow-up theo đúng quy trình riêng, không phụ thuộc vào một phần mềm cố định.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo-area" id="logo-brand">
+                <span class="logo-accent">Agent</span>Rocket <span class="logo-badge">AI</span>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#trust-proof">Khác biệt</a></li>
+                    <li><a href="#problems">Điểm nghẽn</a></li>
+                    <li><a href="#use-cases">Giải pháp</a></li>
+                    <li><a href="#demo-flow">Quy trình</a></li>
+                    <li><a href="#roi-calculator">Ước tính hiệu quả</a></li>
+                    <li><a href="#roadmap">Lộ trình</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="#audit-form" class="btn btn-primary btn-sm cta-button-trigger" data-event-name="click_hero_audit">
+                    Rà soát flow
+                </a>
+            </div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="hero-tagline"><i class="fa-solid fa-rocket"></i> Coach xây hệ thống AI Agent cho SME</span>
+                    <h1 class="hero-title">
+                        Tự xây hệ thống AI Agent quản lý lead, sales và follow-up theo đúng quy trình riêng của doanh nghiệp bạn.
+                    </h1>
+                    <p class="hero-subtext">
+                        AgentRocket AI không bắt doanh nghiệp đi theo một phần mềm cố định. Chúng tôi coach chủ SME thiết kế flow bán hàng của chính mình, rồi cùng xây hệ thống AI Agent đầu tiên chạy được: nhận lead, hỏi thông tin, phân loại, lưu dữ liệu và nhắc follow-up để bạn hiểu, dùng và tự quản lý được.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#audit-form" class="btn btn-primary btn-lg cta-button-trigger" data-event-name="click_hero_audit">
+                            Đăng ký RÀ SOÁT FLOW AI AGENT ĐẦU TIÊN
+                        </a>
+                        <a href="#demo-flow" class="btn btn-secondary btn-lg" id="hero-btn-demo">
+                            Xem Quy Trình Hoạt Động Mẫu
+                        </a>
+                    </div>
+                    <div class="hero-sub-note">
+                        <i class="fa-solid fa-info-circle"></i> Phân tích 45 phút dành cho SME có 50-200 Lead/tháng hoặc đội sales từ 1-3+ nhân sự.
+                    </div>
+                </div>
+
+                <!-- Interactive mockup system -->
+                <div class="hero-visual">
+                    <div class="mockup-container">
+                        <!-- Zalo chat window mockup -->
+                        <div class="mockup-card mockup-zalo">
+                            <div class="mockup-card-header">
+                                <span class="header-dot red"></span>
+                                <span class="header-dot yellow"></span>
+                                <span class="header-dot green"></span>
+                                <span class="card-title"><i class="fa-solid fa-comments"></i> Zalo OA (Mô phỏng Sales Agent)</span>
+                            </div>
+                            <div class="mockup-card-body">
+                                <div class="chat-message user">
+                                    <div class="chat-bubble">Chào bạn, mình muốn xây một flow tư vấn tự động cho đội sales 3 người...</div>
+                                    <div class="chat-time">14:02</div>
+                                </div>
+                                <div class="chat-message agent">
+                                    <div class="chat-bubble font-gradient">Dạ AgentRocket AI xin chào Anh/Chị! Em đã nhận được nhu cầu xây flow tư vấn cho đội sales. Để thiết kế đúng quy trình, doanh nghiệp của mình hoạt động trong lĩnh vực nào ạ?</div>
+                                    <div class="chat-time">14:02 (Sau 5 giây)</div>
+                                </div>
+                                <div class="chat-message user">
+                                    <div class="chat-bubble">Bên mình làm về Nội Thất. Số điện thoại của mình: 0912.345.xxx. Tên Hùng nhé.</div>
+                                    <div class="chat-time">14:03</div>
+                                </div>
+                                <div class="chat-message agent">
+                                    <div class="chat-bubble font-gradient">Cảm ơn anh Hùng! Em đã ghi nhận SĐT 0912.345.xxx và lĩnh vực Nội Thất. Flow sẽ chuyển thông tin này cho người phụ trách để tư vấn bước xây hệ thống đầu tiên.</div>
+                                    <div class="chat-time">14:03 (Sau 3 giây)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sheets/CRM mockup -->
+                        <div class="mockup-card mockup-crm">
+                            <div class="mockup-card-header">
+                                <span class="card-title"><i class="fa-solid fa-table"></i> Google Sheets / CRM Lead (Tự động ghi nhận)</span>
+                            </div>
+                            <div class="mockup-card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="mockup-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Thời gian</th>
+                                                <th>Khách hàng</th>
+                                                <th>SĐT</th>
+                                                <th>Lĩnh vực</th>
+                                                <th>Phân loại</th>
+                                                <th>Nguồn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="highlight-row">
+                                                <td>14:03</td>
+                                                <td>Anh Hùng</td>
+                                                <td>0912345xxx</td>
+                                                <td>Nội Thất</td>
+                                                <td><span class="badge badge-success">Lead Nét</span></td>
+                                                <td>Zalo OA</td>
+                                            </tr>
+                                            <tr>
+                                                <td>13:45</td>
+                                                <td>Chị Lan</td>
+                                                <td>0988776xxx</td>
+                                                <td>Giáo Dục</td>
+                                                <td><span class="badge badge-success">Lead Nét</span></td>
+                                                <td>Facebook</td>
+                                            </tr>
+                                            <tr>
+                                                <td>13:20</td>
+                                                <td>Anh Minh</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td><span class="badge badge-warning">Lead Lọc</span></td>
+                                                <td>Website</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dashboard Mockup -->
+                        <div class="mockup-card mockup-dashboard">
+                            <div class="mockup-card-header">
+                                <span class="card-title"><i class="fa-solid fa-chart-line"></i> Dashboard Hiệu Suất Vận Hành</span>
+                            </div>
+                            <div class="mockup-card-body dashboard-grid">
+                                <div class="kpi-card">
+                                    <span class="kpi-label">Tốc độ phản hồi</span>
+                                    <span class="kpi-value text-blue">&lt; 10s</span>
+                                </div>
+                                <div class="kpi-card">
+                                    <span class="kpi-label">Lead tự động lưu</span>
+                                    <span class="kpi-value text-green">100%</span>
+                                </div>
+                                <div class="kpi-card">
+                                    <span class="kpi-label">Độ chính xác phân loại</span>
+                                    <span class="kpi-value">Đã cấu hình</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPI Badges Section -->
+        <section class="kpi-badges-section">
+            <div class="container grid-4">
+                <div class="kpi-badge-item">
+                    <div class="badge-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="badge-texts">
+                        <h3>Gần như tức thì</h3>
+                        <p>Tốc độ phản hồi 24/7/365</p>
+                    </div>
+                </div>
+                <div class="kpi-badge-item">
+                    <div class="badge-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <div class="badge-texts">
+                        <h3>Theo quy trình riêng</h3>
+                        <p>Thiết kế từ flow thật của SME</p>
+                    </div>
+                </div>
+                <div class="kpi-badge-item">
+                    <div class="badge-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="badge-texts">
+                        <h3>Flow đầu tiên</h3>
+                        <p>Xây đủ nhỏ để chạy được</p>
+                    </div>
+                </div>
+                <div class="kpi-badge-item">
+                    <div class="badge-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+                    <div class="badge-texts">
+                        <h3>Tự quản lý được</h3>
+                        <p>Hiểu logic, dữ liệu và điểm kiểm soát</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Trust Proof Architecture -->
+        <section id="trust-proof" class="trust-proof-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Khác biệt cốt lõi</span>
+                    <h2>SME không chỉ nhận một công cụ. SME xây được hệ thống của mình.</h2>
+                    <p class="section-description">
+                            AgentRocket AI bắt đầu từ quy trình thật của doanh nghiệp: lead đến từ đâu, ai xử lý, dữ liệu lưu ở đâu, khi nào cần follow-up và điểm nào cần con người kiểm soát.
+                    </p>
+                </div>
+                <div class="grid-5 trust-grid">
+                    <div class="trust-card">
+                        <div class="trust-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                        <h3>Bắt đầu từ flow của bạn</h3>
+                        <p>Không ép doanh nghiệp theo mẫu có sẵn. Chúng tôi cùng bạn vẽ lại flow lead, sales và follow-up trước khi chọn công cụ.</p>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-icon"><i class="fa-solid fa-user-check"></i></div>
+                        <h3>Chủ SME hiểu hệ thống</h3>
+                        <p>Bạn biết AI được phép hỏi gì, dữ liệu đi về đâu, lúc nào chuyển cho người thật và cách chỉnh flow khi quy trình thay đổi.</p>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></div>
+                        <h3>Không khóa vào một phần mềm</h3>
+                        <p>Công cụ có thể thay đổi. Logic hệ thống, dữ liệu, kịch bản tư vấn và điểm kiểm soát vẫn là tài sản của doanh nghiệp.</p>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3>Một hệ thống nhỏ chạy được</h3>
+                        <p>Bắt đầu bằng flow vừa đủ: nhận lead, hỏi thông tin, phân loại, lưu dữ liệu, nhắc follow-up và báo người phụ trách.</p>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Có điểm kiểm soát rõ</h3>
+                        <p>AI hỗ trợ xử lý việc lặp lại, nhưng các tình huống nhạy cảm, báo giá lớn hoặc ca cần tư vấn sâu vẫn được chuyển cho con người.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Problem & Cost of Inaction -->
+        <section id="problems" class="problem-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Thách thức vận hành</span>
+                    <h2>Những "Điểm nghẽn âm thầm" làm giảm doanh thu của SME</h2>
+                </div>
+                <div class="grid-4 problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon text-red"><i class="fa-solid fa-hourglass-half"></i></div>
+                        <h3>Chậm trễ phản hồi lead</h3>
+                        <p>Phản hồi chậm làm giảm đáng kể tỷ lệ chuyển đổi khách hàng tiềm năng, đặc biệt khi khách hàng có nhiều sự lựa chọn.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon text-red"><i class="fa-solid fa-copy"></i></div>
+                        <h3>Quá tải tác vụ lặp lại</h3>
+                        <p>Soạn báo giá mẫu, gửi chính sách bán hàng, trả lời câu hỏi lặp đi lặp lại chiếm phần lớn thời gian làm việc của đội ngũ sales.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon text-red"><i class="fa-solid fa-bell-slash"></i></div>
+                        <h3>Bỏ sót cơ hội follow-up</h3>
+                        <p>Bỏ sót hoặc quên bám đuổi khách hàng chưa mua làm lãng phí ngân sách marketing đã chi để mang lead về hệ thống.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon text-red"><i class="fa-solid fa-user-lock"></i></div>
+                        <h3>Lãnh đạo mắc kẹt chi tiết</h3>
+                        <p>Nhà quản lý phải kiểm tra từng đoạn chat, từng file lead và từng nhắc việc, nhưng vẫn khó nhìn được toàn bộ flow bán hàng.</p>
+                    </div>
+                </div>
+
+                <div class="alert-box cost-inaction-alert">
+                    <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="alert-text">
+                        <strong>Lưu ý thực tế từ thị trường:</strong> Với các doanh nghiệp có lượng lead lớn, việc phản hồi chậm và thiếu follow-up định kỳ có thể tạo ra khoản thất thoát doanh thu tiềm năng đáng kể hàng tháng mà đội ngũ kinh doanh khó lòng kiểm soát hết.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Use Case Selector -->
+        <section id="use-cases" class="usecase-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Các flow có thể tự xây</span>
+                    <h2>Không bắt đầu bằng “mua agent”. Bắt đầu bằng flow vận hành của SME.</h2>
+                    <p class="section-description">Chọn từng flow dưới đây để xem cách một hệ thống AI Agent có thể được thiết kế theo quy trình riêng của doanh nghiệp:</p>
+                </div>
+
+                <div class="usecase-tabs-container">
+                    <div class="usecase-tabs" role="tablist">
+                        <button class="tab-btn active" data-tab="sales" role="tab" aria-selected="true" id="tab-sales">
+                            <i class="fa-solid fa-user-tie"></i> Flow Lead & Sales
+                        </button>
+                        <button class="tab-btn" data-tab="care" role="tab" aria-selected="false" id="tab-care">
+                            <i class="fa-solid fa-headset"></i> Flow CSKH
+                        </button>
+                        <button class="tab-btn" data-tab="ops" role="tab" aria-selected="false" id="tab-ops">
+                            <i class="fa-solid fa-gears"></i> Flow Vận hành & Báo cáo
+                        </button>
+                    </div>
+
+                    <div class="usecase-content-wrapper">
+                        <!-- Tab Content: Sales -->
+                        <div class="tab-content active" id="content-sales">
+                            <div class="usecase-grid">
+                                <div class="usecase-info">
+                                    <span class="badge-role">Flow lead & sales</span>
+                                    <h3>Hệ thống tiếp nhận và phân loại lead theo cách bán hàng của bạn</h3>
+                                    <p>Không thay thế đội sales. Flow này giúp doanh nghiệp chuẩn hóa bước đầu: nhận lead, hỏi đúng thông tin, lưu dữ liệu và chuyển cho người phụ trách đúng lúc.</p>
+                                    <ul class="task-list">
+                                        <li><i class="fa-solid fa-circle-check"></i> Xác định lead đang đến từ kênh nào: Zalo OA, Facebook, website hoặc form.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Thiết kế bộ câu hỏi đầu vào theo sản phẩm, ngành và cách tư vấn hiện tại.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Phân loại lead theo tiêu chí riêng: nóng, cần nuôi dưỡng, chưa đủ dữ liệu hoặc không phù hợp.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Lưu dữ liệu vào CRM/Sheets và nhắc sales follow-up theo mốc thời gian đã định.</li>
+                                    </ul>
+                                </div>
+                                <div class="usecase-visual bg-light-blue">
+                                    <div class="visual-kpi-badge"><i class="fa-solid fa-check-double"></i> Flow lead đầu tiên</div>
+                                    <div class="workflow-mini-card">
+                                        <div class="step-line"><span class="step-num">1</span> Khách hàng nhắn hỏi bảng giá lúc 23:00 đêm.</div>
+                                        <div class="step-line"><span class="step-num">2</span> <strong>AI Agent</strong> hỏi thông tin theo kịch bản riêng của doanh nghiệp.</div>
+                                        <div class="step-line"><span class="step-num">3</span> Lưu dữ liệu, phân loại lead và nhắc sales phụ trách xử lý tiếp.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: Customer Care -->
+                        <div class="tab-content" id="content-care">
+                            <div class="usecase-grid">
+                                <div class="usecase-info">
+                                    <span class="badge-role">Flow CSKH</span>
+                                    <h3>Hệ thống trả lời nhất quán theo tri thức và chuẩn dịch vụ của bạn</h3>
+                                    <p>Flow CSKH giúp doanh nghiệp gom lại tri thức sản phẩm, chính sách và câu trả lời thường gặp để AI hỗ trợ đúng phạm vi, có điểm chuyển cho người thật.</p>
+                                    <ul class="task-list">
+                                        <li><i class="fa-solid fa-circle-check"></i> Chuẩn hóa FAQ, chính sách, hướng dẫn sử dụng và thông tin sản phẩm.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Thiết kế phạm vi AI được phép trả lời và những câu bắt buộc chuyển người thật.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Giữ giọng phản hồi nhất quán với thương hiệu và cách tư vấn hiện tại.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Ghi lại lịch sử câu hỏi để doanh nghiệp biết khách đang vướng ở đâu.</li>
+                                    </ul>
+                                </div>
+                                <div class="usecase-visual bg-light-blue">
+                                    <div class="visual-kpi-badge"><i class="fa-solid fa-shield"></i> Trả lời có kiểm soát</div>
+                                    <div class="workflow-mini-card">
+                                        <div class="step-line"><span class="step-num">1</span> Khách hỏi về chính sách bảo hành của thiết bị.</div>
+                                        <div class="step-line"><span class="step-num">2</span> <strong>AI Agent</strong> đọc tri thức đã duyệt và trả lời trong phạm vi cho phép.</div>
+                                        <div class="step-line"><span class="step-num">3</span> Nếu câu hỏi vượt phạm vi, hệ thống ghi nhận và chuyển cho người phụ trách.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: Operations -->
+                        <div class="tab-content" id="content-ops">
+                            <div class="usecase-grid">
+                                <div class="usecase-info">
+                                    <span class="badge-role">Flow vận hành & báo cáo</span>
+                                    <h3>Hệ thống truy xuất dữ liệu và nhắc việc theo điểm kiểm soát của doanh nghiệp</h3>
+                                    <p>Flow vận hành giúp chủ SME nhìn nhanh những dữ liệu quan trọng, nhưng vẫn giữ logic kiểm soát rõ: dữ liệu nào được đọc, ai được hỏi và báo cáo nào được trả về.</p>
+                                    <ul class="task-list">
+                                        <li><i class="fa-solid fa-circle-check"></i> Xác định nguồn dữ liệu được phép kết nối: kho, đơn hàng, CRM hoặc Sheets báo cáo.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Thiết kế câu hỏi quản trị thường dùng: lead mới, tồn kho, đơn chờ xử lý, follow-up trễ.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Tổng hợp dữ liệu theo mẫu báo cáo ngắn, dễ đọc, đúng nhu cầu của chủ doanh nghiệp.</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Nhắc việc theo điểm kiểm soát: đơn trễ, lead chưa gọi, khách cần chăm sóc lại.</li>
+                                    </ul>
+                                </div>
+                                <div class="usecase-visual bg-light-blue">
+                                    <div class="visual-kpi-badge"><i class="fa-solid fa-chart-simple"></i> Báo cáo theo flow</div>
+                                    <div class="workflow-mini-card">
+                                        <div class="step-line"><span class="step-num">1</span> Chủ doanh nghiệp hỏi: “Hôm nay còn lead nào chưa được follow-up?”</div>
+                                        <div class="step-line"><span class="step-num">2</span> <strong>AI Agent</strong> đọc Sheets/CRM theo quyền đã cấu hình.</div>
+                                        <div class="step-line"><span class="step-num">3</span> Trả về danh sách cần xử lý và nhắc người phụ trách đúng flow.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Demo Flow (Before vs After) -->
+        <section id="demo-flow" class="demoflow-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Quy trình vận hành mẫu</span>
+                    <h2>So sánh quy trình xử lý Lead thực tế</h2>
+                </div>
+
+                <div class="demoflow-container grid-2">
+                    <!-- Before Card -->
+                    <div class="demoflow-card before">
+                        <div class="flow-header">
+                            <span class="flow-status text-red"><i class="fa-solid fa-circle-xmark"></i> Quy trình cũ (Thủ công & Trễ nải)</span>
+                        </div>
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="flow-number">1</div>
+                                <div class="flow-text">
+                                    <strong>Khách nhắn tin tư vấn</strong>
+                                    <p>Lead đổ về lúc ngoài giờ làm việc hoặc Sales đang bận tư vấn khách khác.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">2</div>
+                                <div class="flow-text">
+                                    <strong>Chờ đợi phản hồi (10 - 30 phút)</strong>
+                                    <p>Khách hàng mất kiên nhẫn, bắt đầu chuyển hướng tìm kiếm đối thủ cạnh tranh khác.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">3</div>
+                                <div class="flow-text">
+                                    <strong>Ghi chép thủ công & Quên lưu lead</strong>
+                                    <p>Nhân viên nhập thiếu thông tin vào Sheets/CRM. Dữ liệu lead bị bỏ quên không bám đuổi.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">4</div>
+                                <div class="flow-text text-red">
+                                    <strong>Khách hàng hủy mua / Không chốt đơn</strong>
+                                    <p>Lãng phí tiền quảng cáo và công sức thu hút ban đầu của doanh nghiệp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- After Card -->
+                    <div class="demoflow-card after">
+                        <div class="flow-header">
+                            <span class="flow-status text-green"><i class="fa-solid fa-circle-check"></i> Flow mới do SME hiểu và tự quản lý được</span>
+                        </div>
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="flow-number">1</div>
+                                <div class="flow-text">
+                                    <strong>Khách nhắn tin tư vấn</strong>
+                                    <p>Lead đổ về bất kỳ kênh nào: Zalo OA, Facebook Messenger, Website...</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">2</div>
+                                <div class="flow-text">
+                                    <strong>AI Agent hỏi theo kịch bản riêng</strong>
+                                    <p>Phản hồi nhanh, hỏi đúng thông tin đầu vào và chỉ xử lý trong phạm vi doanh nghiệp đã thiết kế.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">3</div>
+                                <div class="flow-text">
+                                    <strong>Lưu dữ liệu và nhắc follow-up</strong>
+                                    <p>Dữ liệu được ghi vào CRM/Sheets, phân loại theo tiêu chí riêng và nhắc đúng người phụ trách.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-number">4</div>
+                                <div class="flow-text text-green">
+                                    <strong>Con người xử lý phần cần tư vấn sâu</strong>
+                                    <p>Đội sales tiếp quản các ca quan trọng, còn chủ SME vẫn nhìn được flow đang chạy ra sao.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Interactive ROI Calculator -->
+        <section id="roi-calculator" class="roi-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Ước tính hiệu quả vận hành</span>
+                    <h2>Trước khi xây flow, hãy nhìn thử phần việc đang lặp lại mỗi tháng</h2>
+                    <p class="section-description">Kéo các thanh trượt dưới đây để ước tính giá trị của những đoạn việc có thể đưa vào hệ thống AI Agent đầu tiên:</p>
+                </div>
+
+                <div class="roi-container grid-2">
+                    <!-- Sliders -->
+                    <div class="roi-sliders-card">
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-staff">Số nhân sự làm tác vụ lặp lại</label>
+                                <span class="slider-value" id="val-staff">5 người</span>
+                            </div>
+                            <input type="range" id="range-staff" min="2" max="50" value="5" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-salary">Lương trung bình nhân sự/tháng</label>
+                                <span class="slider-value" id="val-salary">10,000,000 đ</span>
+                            </div>
+                            <input type="range" id="range-salary" min="7000000" max="25000000" step="500000" value="10000000" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-time">% thời gian dành cho việc lặp lại</label>
+                                <span class="slider-value" id="val-time">50%</span>
+                            </div>
+                            <input type="range" id="range-time" min="10" max="100" step="5" value="50" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-automation">Phần việc có thể đưa vào flow AI Agent</label>
+                                <span class="slider-value" id="val-automation">60%</span>
+                            </div>
+                            <input type="range" id="range-automation" min="30" max="80" step="5" value="60" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-leads">Số Lead nhận được mỗi tháng</label>
+                                <span class="slider-value" id="val-leads">1,000 lead</span>
+                            </div>
+                            <input type="range" id="range-leads" min="100" max="5000" step="50" value="1000" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-conv">Tỷ lệ chốt đơn hiện tại của đội sales</label>
+                                <span class="slider-value" id="val-conv">5%</span>
+                            </div>
+                            <input type="range" id="range-conv" min="1" max="30" step="0.5" value="5" class="custom-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="range-aov">Giá trị đơn hàng trung bình (AOV)</label>
+                                <span class="slider-value" id="val-aov">2,000,000 đ</span>
+                            </div>
+                            <input type="range" id="range-aov" min="500000" max="50000000" step="500000" value="20000000" class="custom-slider">
+                        </div>
+                    </div>
+
+                    <!-- Outputs Display -->
+                    <div class="roi-results-card bg-light-blue">
+                        <div class="results-header">
+                            <h3>Hiệu quả ước tính của flow đầu tiên</h3>
+                            <p>Các chỉ số mô phỏng để bạn nhìn rõ cơ hội trước khi xây hệ thống</p>
+                        </div>
+                        <div class="results-body">
+                            <div class="result-item">
+                                <span class="result-label">Giá trị giờ công lặp lại có thể giải phóng/tháng:</span>
+                                <span class="result-val text-blue" id="res-saving">0 đ</span>
+                                <p class="result-desc">Ước tính phần việc lặp lại có thể được flow AI Agent hỗ trợ, không phải thay thế toàn bộ nhân sự.</p>
+                            </div>
+
+                            <div class="result-item">
+                                <span class="result-label">Doanh thu tăng thêm ước tính/tháng:</span>
+                                <span class="result-val text-green" id="res-revenue">0 đ</span>
+                                <p class="result-desc">Do tăng tương đối 15% tỷ lệ chốt đơn nhờ phản hồi nhanh và bám đuổi (ví dụ: từ 5% thành 5.75%).</p>
+                            </div>
+
+                            <div class="result-item border-top">
+                                <span class="result-label">GIÁ TRỊ RÒNG ƯỚC TÍNH/THÁNG:</span>
+                                <span class="result-val highlight" id="res-net-roi">0 đ</span>
+                                <p class="result-desc">Tổng giá trị ước tính sau khi trừ chi phí vận hành công nghệ AI (giả định 1,500,000 đ/tháng).</p>
+                            </div>
+                        </div>
+                        <div class="results-footer">
+                            <i class="fa-solid fa-circle-info"></i> *Đây là mô phỏng sơ bộ, không phải cam kết kết quả. Hiệu quả thực tế phụ thuộc vào chất lượng dữ liệu, độ rõ của flow và mức độ phối hợp của từng doanh nghiệp.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Implementation Roadmap -->
+        <section id="roadmap" class="roadmap-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Từng bước vận hành</span>
+                    <h2>Lộ Trình Triển Khai Trong 4 Tuần</h2>
+                    <p class="section-description">Lộ trình coach cùng doanh nghiệp xây hệ thống đầu tiên, đủ rõ để vận hành và đủ dễ hiểu để tự quản lý:</p>
+                </div>
+
+                <div class="roadmap-timeline">
+                    <!-- Week 1 -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">Tuần 1</div>
+                        <div class="roadmap-content">
+                            <h3>Vẽ lại flow bán hàng thật</h3>
+                            <p>Làm rõ lead đến từ đâu, ai xử lý, khách thường hỏi gì, dữ liệu cần lưu ở đâu và khi nào cần follow-up.</p>
+                            <span class="roadmap-output"><strong>Đầu ra:</strong> Bản đồ flow lead, sales, follow-up và các điểm kiểm soát chính.</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">Tuần 2</div>
+                        <div class="roadmap-content">
+                            <h3>Thiết kế logic AI Agent</h3>
+                            <p>Thiết kế câu hỏi, kịch bản phân loại, ranh giới hội thoại và cách AI chuyển ca cho người thật khi cần.</p>
+                            <span class="roadmap-output"><strong>Đầu ra:</strong> Logic AI Agent rõ ràng, doanh nghiệp hiểu được trước khi chạy thử.</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">Tuần 3</div>
+                        <div class="roadmap-content">
+                            <h3>Xây flow đầu tiên chạy được</h3>
+                            <p>Kết nối AI Agent với Zalo OA, Fanpage, website, CRM hoặc Google Sheets theo đúng hệ thống hiện có của doanh nghiệp.</p>
+                            <span class="roadmap-output"><strong>Đầu ra:</strong> Flow đầu tiên chạy thử: nhận lead, phân loại, lưu dữ liệu và nhắc follow-up.</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">Tuần 4</div>
+                        <div class="roadmap-content">
+                            <h3>Chuyển giao để tự quản lý</h3>
+                            <p>Tinh chỉnh tông giọng, đo độ chính xác, hướng dẫn đội sales phối hợp với AI và bàn giao cách chỉnh flow sau này.</p>
+                            <span class="roadmap-output"><strong>Đầu ra:</strong> Hệ thống nghiệm thu, SOP vận hành và logic để doanh nghiệp tự quản lý.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Qualification (Who is it for / Not for) -->
+        <section class="qualification-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Khách hàng của chúng tôi</span>
+                    <h2>AgentRocket AI Có Phù Hợp Với Bạn?</h2>
+                </div>
+
+                <div class="qualification-grid grid-2">
+                    <div class="qual-card fit">
+                        <div class="qual-title"><i class="fa-solid fa-circle-check text-green"></i> Doanh nghiệp PHÙ HỢP nếu:</div>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Có lượng lead khoảng 50-200 lead/tháng HOẶC đội sales/CSKH từ 1-3+ nhân sự.</li>
+                            <li><i class="fa-solid fa-check"></i> Đã có quy trình tư vấn/chăm sóc hoặc tài liệu đào tạo bán hàng bằng văn bản rõ ràng.</li>
+                            <li><i class="fa-solid fa-check"></i> Muốn tự xây một flow AI Agent đầu tiên đủ rõ, không dùng ChatGPT rời rạc.</li>
+                            <li><i class="fa-solid fa-check"></i> Sẵn sàng cử 1 người làm đầu mối để cùng vẽ flow, chuẩn bị tri thức và kiểm tra hệ thống.</li>
+                        </ul>
+                    </div>
+
+                    <div class="qual-card not-fit">
+                        <div class="qual-title"><i class="fa-solid fa-circle-xmark text-red"></i> Doanh nghiệp CHƯA PHÙ HỢP nếu:</div>
+                        <ul>
+                            <li><i class="fa-solid fa-xmark"></i> Chưa định hình rõ ràng quy trình bán hàng hoặc kịch bản tư vấn sản phẩm tối thiểu.</li>
+                            <li><i class="fa-solid fa-xmark"></i> Kỳ vọng AI thay thế hoàn toàn con người 100% từ đầu mà không cần có nhân viên giám sát.</li>
+                            <li><i class="fa-solid fa-xmark"></i> Không có tài liệu hoặc thông tin sản phẩm bằng văn bản để làm dữ liệu cho AI học.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Handover & Ownership -->
+        <section class="security-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Để SME tự quản lý được</span>
+                    <h2>Xây xong không bị phụ thuộc. Chủ doanh nghiệp hiểu hệ thống của mình.</h2>
+                <p class="section-description">Điều quan trọng không chỉ là có AI Agent. Điều quan trọng là doanh nghiệp biết flow đang chạy thế nào, ai phụ trách phần nào và khi cần thì chỉnh ở đâu:</p>
+                </div>
+
+                <div class="grid-4 security-grid">
+                    <div class="security-card">
+                        <div class="sec-icon"><i class="fa-solid fa-key"></i></div>
+                        <h3>Biết flow đang chạy ra sao</h3>
+                        <p>Doanh nghiệp thấy rõ từng bước: lead vào từ đâu, AI hỏi gì, dữ liệu lưu ở đâu và khi nào chuyển cho sales.</p>
+                    </div>
+                    <div class="security-card">
+                        <div class="sec-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <h3>Có tài liệu để dùng lại</h3>
+                        <p>Sau khi xây, doanh nghiệp có bản mô tả flow, kịch bản hỏi đáp, quy tắc phân loại lead và hướng dẫn vận hành nội bộ.</p>
+                    </div>
+                    <div class="security-card">
+                        <div class="sec-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>Đội sales biết phối hợp</h3>
+                        <p>AI xử lý phần đầu vào và việc lặp lại. Sales biết lúc nào cần tiếp quản, follow-up ra sao và cập nhật dữ liệu thế nào.</p>
+                    </div>
+                    <div class="security-card">
+                        <div class="sec-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3>Chỉnh được khi kinh doanh đổi</h3>
+                        <p>Khi sản phẩm, chính sách hoặc cách bán thay đổi, doanh nghiệp biết phần nào cần sửa trước thay vì phải làm lại từ đầu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Call to Action / Form -->
+        <section id="audit-form" class="cta-form-section section-padding">
+            <div class="container">
+                <div class="cta-form-wrapper grid-2">
+                    <div class="cta-form-info">
+                        <h2>Đăng ký RÀ SOÁT FLOW AI AGENT ĐẦU TIÊN</h2>
+                        <p class="cta-desc">
+                            Hằng tháng, chúng tôi chọn lọc tối đa <strong>05 doanh nghiệp phù hợp</strong> để cùng rà soát flow lead, sales, follow-up và xác định hệ thống AI Agent đầu tiên nên xây.
+                        </p>
+                        <div class="audit-details">
+                            <div class="detail-item">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <span>Vẽ lại flow hiện tại: lead đến từ đâu, ai xử lý, dữ liệu lưu ở đâu.</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span>Ước tính hiệu quả dựa trên số liệu vận hành thực tế của bạn.</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fa-solid fa-diagram-project"></i>
+                                <span>Đề xuất flow AI Agent đầu tiên nên xây để doanh nghiệp tự quản lý được.</span>
+                            </div>
+                        </div>
+                        <div class="cta-requirement">
+                            <i class="fa-solid fa-circle-exclamation"></i> <strong>Điều kiện áp dụng:</strong> Dành cho doanh nghiệp SME có 50-200 lead/tháng hoặc đội sales từ 1-3+ nhân sự.
+                        </div>
+                    </div>
+
+                    <div class="cta-form-card">
+                        <form id="leadForm" class="lead-form">
+                            <div class="form-step-indicator" hidden>
+                                <span class="step-pill active" data-step-indicator="1">Thông tin liên hệ</span>
+                                <span class="step-pill" data-step-indicator="2" hidden>Thông tin doanh nghiệp</span>
+                                <span class="step-pill" data-step-indicator="3" hidden>Thông tin bổ sung</span>
+                            </div>
+
+                            <div class="form-step active" data-form-step="1">
+                                <div class="form-group">
+                                    <label for="fullname">Họ và tên người liên hệ <span class="required">*</span></label>
+                                    <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required class="form-control" data-step-field="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company">Tên doanh nghiệp <span class="required">*</span></label>
+                                    <input type="text" id="company" name="company" placeholder="Công ty TNHH ABC" required class="form-control" data-step-field="1">
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="phone">Số điện thoại liên hệ <span class="required">*</span></label>
+                                        <input type="tel" id="phone" name="phone" placeholder="09012345xx" required class="form-control" data-step-field="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email hoặc Số Zalo nhận lịch <span class="required">*</span></label>
+                                        <input type="text" id="email" name="email" placeholder="email@domain.com hoặc Số Zalo" required class="form-control" data-step-field="1">
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-block" id="btn-next-step">
+                                    Tiếp tục
+                                </button>
+                            </div>
+
+                            <div class="form-step" data-form-step="2" hidden>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="industry">Ngành kinh doanh <span class="required">*</span></label>
+                                        <select id="industry" name="industry" required class="form-control" data-step-field="2">
+                                            <option value="" disabled selected>Chọn ngành nghề</option>
+                                            <option value="retail">Bán lẻ / E-commerce</option>
+                                            <option value="fnb">F&B / Nhà hàng / Cafe</option>
+                                            <option value="realestate">Bất động sản</option>
+                                            <option value="education">Giáo dục / Đào tạo</option>
+                                            <option value="furniture-construction">Nội thất / Xây dựng / Vật liệu</option>
+                                            <option value="clinic">Y tế / Phòng khám</option>
+                                            <option value="beauty-fitness">Spa / Thẩm mỹ / Fitness</option>
+                                            <option value="travel-service">Du lịch / Dịch vụ địa phương</option>
+                                            <option value="manufacturing-distribution">Sản xuất / Phân phối</option>
+                                            <option value="b2bservice">Dịch vụ B2B</option>
+                                            <option value="other">Lĩnh vực khác</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="size">Quy mô nhân sự <span class="required">*</span></label>
+                                        <select id="size" name="size" required class="form-control" data-step-field="2">
+                                            <option value="" disabled selected>Chọn quy mô</option>
+                                            <option value="1-5">1 - 5 nhân sự</option>
+                                            <option value="6-20">6 - 20 nhân sự</option>
+                                            <option value="21-50">21 - 50 nhân sự</option>
+                                            <option value="51-100">51 - 100 nhân sự</option>
+                                            <option value="100+">Trên 100 nhân sự</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="revenue">Doanh thu năm ước tính <span class="required">*</span></label>
+                                        <select id="revenue" name="revenue" required class="form-control" data-step-field="2">
+                                            <option value="" disabled selected>Chọn doanh thu</option>
+                                            <option value="under-5">Dưới 5 tỷ VND</option>
+                                            <option value="5-20">5 - 20 tỷ VND</option>
+                                            <option value="20-50">20 - 50 tỷ VND</option>
+                                            <option value="50-100">50 - 100 tỷ VND</option>
+                                            <option value="100+">Trên 100 tỷ VND</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="leads">Số lead trung bình/tháng <span class="required">*</span></label>
+                                        <select id="leads" name="leads" required class="form-control" data-step-field="2">
+                                            <option value="" disabled selected>Chọn lượng lead</option>
+                                            <option value="under-50">Dưới 50 lead</option>
+                                            <option value="50-100">50 - 100 lead</option>
+                                            <option value="100-200">100 - 200 lead</option>
+                                            <option value="200-500">200 - 500 lead</option>
+                                            <option value="500+">Trên 500 lead</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pain">Vấn đề lớn nhất hiện tại đang gặp phải <span class="required">*</span></label>
+                                    <select id="pain" name="pain" required class="form-control" data-step-field="2">
+                                        <option value="" disabled selected>Chọn vấn đề chính</option>
+                                        <option value="slow">Nhân viên phản hồi khách chậm</option>
+                                        <option value="miss">Bỏ sót cơ hội follow-up lead</option>
+                                        <option value="scattered">Lead nằm rải rác ở nhiều kênh</option>
+                                        <option value="no-qualification">Chưa phân loại được lead nóng/lạnh</option>
+                                        <option value="overload">CSKH bị quá tải câu hỏi lặp lại</option>
+                                        <option value="report">Mất thời gian làm báo cáo thủ công</option>
+                                        <option value="owner-control">Chủ doanh nghiệp khó kiểm soát pipeline</option>
+                                        <option value="other">Vấn đề khác</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary btn-block" id="btn-prev-step">
+                                        Quay lại
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-block" id="btn-next-step-2">
+                                        Tiếp tục
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-step" data-form-step="3" hidden>
+                                <div class="survey-intro">
+                                    <strong>Thông tin bổ sung hữu ích</strong>
+                                    <span>Giúp buổi nói chuyện trọng tâm hơn</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="survey-lead-channel">Kênh nhận lead chính hiện tại</label>
+                                    <select id="survey-lead-channel" name="leadChannel" class="form-control" data-step-field="3">
+                                        <option value="" selected>Chọn kênh chính</option>
+                                        <option value="zalo">Zalo cá nhân / Zalo OA</option>
+                                        <option value="facebook">Facebook Page / Messenger</option>
+                                        <option value="ads">Lead từ quảng cáo</option>
+                                        <option value="website">Website / Landing page</option>
+                                        <option value="hotline">Hotline</option>
+                                        <option value="referral">Giới thiệu / Khách cũ</option>
+                                        <option value="other">Kênh khác</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="survey-lead-storage">Lead hiện được lưu ở đâu?</label>
+                                    <select id="survey-lead-storage" name="leadStorage" class="form-control" data-step-field="3">
+                                        <option value="" selected>Chọn nơi lưu lead</option>
+                                        <option value="google-sheets">Google Sheets</option>
+                                        <option value="crm">CRM như HubSpot, Getfly, KiotViet, Pancake...</option>
+                                        <option value="excel">Excel thủ công</option>
+                                        <option value="chat-inbox">Trong inbox/chat từng kênh</option>
+                                        <option value="notebook">Sổ tay / ghi chú cá nhân</option>
+                                        <option value="not-centralized">Chưa lưu tập trung</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="survey-ai-task">Việc muốn AI Agent xử lý đầu tiên</label>
+                                    <select id="survey-ai-task" name="firstAiTask" class="form-control" data-step-field="3">
+                                        <option value="" selected>Chọn tác vụ ưu tiên</option>
+                                        <option value="instant-reply">Phản hồi khách nhanh hơn</option>
+                                        <option value="lead-collection">Thu thập thông tin lead</option>
+                                        <option value="lead-qualification">Phân loại lead nóng/lạnh</option>
+                                        <option value="follow-up">Nhắc follow-up đúng thời điểm</option>
+                                        <option value="faq-automation">Trả lời câu hỏi lặp lại</option>
+                                        <option value="pipeline-report">Tổng hợp báo cáo pipeline</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="survey-readiness">Mức độ sẵn sàng xây flow đầu tiên</label>
+                                    <select id="survey-readiness" name="readiness" class="form-control" data-step-field="3">
+                                        <option value="" selected>Chọn mức độ</option>
+                                        <option value="urgent">Muốn xử lý trong tháng này</option>
+                                        <option value="audit-first">Muốn rà soát trước khi quyết định</option>
+                                        <option value="pilot">Muốn thử nghiệm nhỏ trước</option>
+                                        <option value="researching">Đang tìm hiểu</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary btn-block" id="btn-prev-step-3">
+                                        Quay lại
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-block" id="btn-submit-form">
+                                        Gửi yêu cầu đăng ký
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-microcopy">
+                                Không yêu cầu thanh toán. Buổi audit chỉ nhằm xác định doanh nghiệp của bạn nên bắt đầu bằng flow AI Agent nào và cần chuẩn bị gì để tự quản lý được.
+                            </div>
+                        </form>
+
+                        <!-- Form submission success overlay -->
+                        <div id="formSuccess" class="form-success-overlay">
+                            <div class="success-content text-center">
+                                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                                <h3>Đăng Ký Thành Công!</h3>
+                                <p>Cảm ơn Anh/Chị đã đăng ký buổi RÀ SOÁT FLOW AI AGENT ĐẦU TIÊN.</p>
+                                <p class="submission-summary">Thông tin chi tiết và lịch hẹn sẽ được chúng tôi chuẩn bị và liên hệ sớm nhất qua thông tin Zalo/Email mà Anh/Chị cung cấp.</p>
+                                <button class="btn btn-secondary btn-sm" id="btn-close-success">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: FAQ -->
+        <section id="faqs" class="faq-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Giải đáp thắc mắc</span>
+                    <h2>Câu Hỏi Thường Gặp</h2>
+                </div>
+
+                <div class="faq-accordion-wrapper">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>AI Agent có bị "ảo giác" tự hứa hẹn bừa bãi với khách hàng không?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Không. AgentRocket AI sử dụng hệ thống Guardrails (ranh giới hội thoại) nghiêm ngặt. Khi khách hỏi nằm ngoài tài liệu tri thức sản phẩm được phê duyệt, AI sẽ lịch sự xin thông tin và thông báo điều phối cho nhân sự người xử lý, tuyệt đối không tự chế câu trả lời gây ảnh hưởng tới uy tín của thương hiệu.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Doanh nghiệp của tôi đang dùng CRM Getfly/KiotViet thì có xây flow được không?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Có. Trước tiên cần hiểu flow hiện tại và dữ liệu đang nằm ở đâu. Nếu CRM hỗ trợ API/Webhook, hệ thống có thể kết nối trực tiếp. Nếu chưa, chúng tôi sẽ đề xuất cách đi vừa đủ như Google Sheets, Make/Zapier hoặc một bước bán tự động có người kiểm tra.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Chi phí duy trì sau khi xây flow như thế nào?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Chi phí vận hành công nghệ phụ thuộc vào lượng tin nhắn, token và công cụ kết nối mà doanh nghiệp dùng. Khi thiết kế flow, chúng tôi sẽ giúp bạn nhìn rõ phần chi phí này để bắt đầu vừa đủ, không phình hệ thống quá sớm.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Thời gian xây dựng tri thức sản phẩm mất bao lâu?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Thường mất từ 1 - 2 tuần đầu tiên. Việc quan trọng không chỉ là nạp tài liệu cho AI, mà là sắp lại tri thức sản phẩm, câu hỏi thường gặp và kịch bản tư vấn thành cấu trúc đủ rõ để chủ doanh nghiệp kiểm soát được.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo-area text-white">
+                    <span class="logo-accent">Agent</span>Rocket <span class="logo-badge">AI</span>
+                </a>
+                <p>Coach giúp SME tự xây hệ thống AI Agent đầu tiên theo quy trình thật của mình.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Về chúng tôi</h4>
+                <ul>
+                    <li><a href="#trust-proof">Khác biệt</a></li>
+                    <li><a href="#use-cases">Các flow mẫu</a></li>
+                    <li><a href="#roi-calculator">Ước tính hiệu quả</a></li>
+                    <li><a href="#audit-form">Rà soát flow</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Thông tin liên hệ</h4>
+                <p><i class="fa-solid fa-envelope"></i> contact@agentrocket.ai</p>
+                <p><i class="fa-solid fa-shield-halved"></i> Bảo mật & an toàn dữ liệu rõ ràng</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 AgentRocket AI. Tất cả quyền được bảo lưu. Thiết kế dành riêng cho quy trình SME Việt Nam.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Sales Chatbot Widget -->
+    <div class="sales-chatbot" id="sales-chatbot">
+        <button class="chatbot-toggle" id="chatbot-toggle" type="button" aria-label="Mở chatbot AgentRocket AI" aria-expanded="false" aria-controls="chatbot-panel">
+            <span class="chatbot-toggle-icon"><i class="fa-solid fa-comments"></i></span>
+            <span class="chatbot-toggle-text">Hỏi về flow AI</span>
+        </button>
+
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="Chatbot tư vấn AgentRocket AI" hidden>
+            <div class="chatbot-panel-header">
+                <div>
+                    <span class="chatbot-eyebrow">AgentRocket AI</span>
+                    <strong>Trợ lý rà soát flow</strong>
+                </div>
+                <button class="chatbot-close" id="chatbot-close" type="button" aria-label="Đóng chatbot">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite"></div>
+
+            <div class="chatbot-quick-actions" aria-label="Câu hỏi nhanh">
+                <button type="button" data-chatbot-prompt="AgentRocket AI làm gì?">Làm gì?</button>
+                <button type="button" data-chatbot-prompt="Giá bao nhiêu?">Giá</button>
+                <button type="button" data-chatbot-prompt="AI có thay sales không?">AI & sales</button>
+                <button type="button" data-chatbot-prompt="Tôi muốn mua">Muốn mua</button>
+            </div>
+
+            <form class="chatbot-input-row" id="chatbot-form">
+                <label class="sr-only" for="chatbot-input">Nhập câu hỏi cho chatbot</label>
+                <input id="chatbot-input" type="text" autocomplete="off" placeholder="Hỏi về giá, CRM, sales, follow-up...">
+                <button type="submit" aria-label="Gửi câu hỏi">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+
+            <a class="chatbot-form-link" id="chatbot-form-link" href="#audit-form" hidden>
+                Điền form danh sách chờ
+            </a>
+        </div>
+    </div>    <!-- Lead webhook configuration -->
+    <script src="assets/js/lead-config.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

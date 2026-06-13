@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Bản Đồ Flow Lead 1 Trang</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #1f2933;
+      background: #ffffff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 10.8px;
+      line-height: 1.42;
+    }
+
+    .page {
+      width: 277mm;
+      min-height: 190mm;
+      padding: 0;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #22313f;
+    }
+
+    h1 {
+      margin: 0 0 5px;
+      color: #111827;
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 780px;
+      color: #405261;
+      font-size: 12px;
+    }
+
+    .note {
+      margin: 0;
+      padding: 8px 10px;
+      border: 1px solid #d8dee5;
+      border-left: 5px solid #2f6f73;
+      background: #f7faf9;
+      color: #243746;
+      font-size: 10.5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .step {
+      min-height: 92px;
+      padding: 8px;
+      border: 1px solid #cdd6df;
+      border-top: 4px solid #2f6f73;
+      border-radius: 6px;
+      background: #ffffff;
+    }
+
+    .step h2 {
+      margin: 0 0 5px;
+      color: #111827;
+      font-size: 12.8px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .step .question {
+      margin: 0 0 6px;
+      color: #52616f;
+      font-size: 9.8px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    li {
+      margin: 0 0 3px;
+    }
+
+    .work-area {
+      display: grid;
+      grid-template-columns: 1.05fr 1.05fr 0.9fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .box {
+      padding: 8px;
+      border: 1px solid #cdd6df;
+      border-radius: 6px;
+      background: #fbfcfd;
+    }
+
+    .box h3 {
+      margin: 0 0 5px;
+      color: #111827;
+      font-size: 12.2px;
+      line-height: 1.15;
+    }
+
+    .lines {
+      display: grid;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .line {
+      height: 18px;
+      border-bottom: 1px solid #b8c4cf;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      background: #ffffff;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      padding: 4px 5px;
+      border: 1px solid #ccd5df;
+      text-align: left;
+      vertical-align: top;
+      font-size: 9.5px;
+    }
+
+    .mini-table th {
+      color: #111827;
+      background: #eef3f3;
+      font-weight: 650;
+    }
+
+    .prompt {
+      margin-top: 6px;
+      padding: 7px;
+      border-radius: 5px;
+      background: #eef7f5;
+      color: #1d3f42;
+      font-size: 9.8px;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px 10px;
+      margin-top: 6px;
+    }
+
+    .check {
+      display: flex;
+      gap: 5px;
+      align-items: flex-start;
+      font-size: 9.8px;
+    }
+
+    .square {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      margin-top: 2px;
+      border: 1px solid #657789;
+    }
+
+    .brand {
+      color: #52616f;
+      font-size: 9px;
+      text-align: right;
+      align-self: end;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="header">
+      <div>
+        <h1>Bản Đồ Flow Lead 1 Trang</h1>
+        <p class="subtitle">
+          Dành cho chủ SME muốn nhìn rõ một lead đi từ lúc để lại thông tin đến lúc có người follow-up.
+          Không cần phức tạp. Chỉ cần đủ rõ để đội sales biết việc tiếp theo là gì.
+        </p>
+      </div>
+      <p class="note">
+        Thật ra, nhiều doanh nghiệp không mất lead vì thiếu công cụ.
+        Họ mất lead vì flow chưa rõ: ai nhận, hỏi gì, lưu gì, nhắc ai, và khi nào quay lại.
+        Dùng trang này để vẽ lại flow đầu tiên trước khi nghĩ tới AI Agent.
+      </p>
+    </section>
+
+    <section class="grid" aria-label="5 bước vẽ flow lead">
+      <article class="step">
+        <h2>1. Lead đi vào từ đâu?</h2>
+        <p class="question">Chọn 1-3 nguồn chính, đừng gom tất cả vào một chỗ.</p>
+        <ul>
+          <li>Facebook / TikTok / Website</li>
+          <li>Zalo / Form / Inbox</li>
+          <li>Giới thiệu từ khách cũ</li>
+          <li>Nguồn quan trọng nhất hôm nay: ______</li>
+        </ul>
+      </article>
+
+      <article class="step">
+        <h2>2. Cần hỏi gì đầu tiên?</h2>
+        <p class="question">Hỏi vừa đủ để hiểu nhu cầu, không biến tư vấn thành khảo sát dài.</p>
+        <ul>
+          <li>Khách đang muốn giải quyết việc gì?</li>
+          <li>Họ cần kết quả trong bao lâu?</li>
+          <li>Ngân sách hoặc mức sẵn sàng?</li>
+          <li>Ai là người ra quyết định?</li>
+        </ul>
+      </article>
+
+      <article class="step">
+        <h2>3. Lưu dữ liệu nào?</h2>
+        <p class="question">Nếu không lưu đúng, AI hay sales đều khó làm tiếp.</p>
+        <ul>
+          <li>Tên, số điện thoại, kênh vào</li>
+          <li>Nhu cầu chính của khách</li>
+          <li>Mức độ quan tâm: nóng / ấm / lạnh</li>
+          <li>Bước tiếp theo đã hẹn</li>
+        </ul>
+      </article>
+
+      <article class="step">
+        <h2>4. Ai xử lý bước tiếp?</h2>
+        <p class="question">Một lead chỉ nên có một người chịu trách nhiệm chính.</p>
+        <ul>
+          <li>Người nhận lead: ______</li>
+          <li>Người tư vấn: ______</li>
+          <li>Người chốt đơn: ______</li>
+          <li>Khi quá hạn thì báo ai: ______</li>
+        </ul>
+      </article>
+
+      <article class="step">
+        <h2>5. Follow-up khi nào?</h2>
+        <p class="question">Không follow-up theo cảm hứng. Đặt điểm kiểm soát rõ.</p>
+        <ul>
+          <li>Sau 15 phút nếu khách vừa để lại form</li>
+          <li>Sau 24 giờ nếu khách chưa trả lời</li>
+          <li>Sau 3 ngày nếu khách cần suy nghĩ</li>
+          <li>Sau 7 ngày nếu cần nuôi lại</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="work-area">
+      <article class="box">
+        <h3>Flow hiện tại của tôi</h3>
+        <p>Viết lại bằng câu thật ngắn. Mỗi dòng là một bước. Nếu có bước nào “không biết ai làm”, đó là điểm cần sửa trước.</p>
+        <div class="lines">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h3>Flow nên có sau khi chỉnh</h3>
+        <p>Mục tiêu không phải làm cho hay. Mục tiêu là làm cho đội của bạn dùng được và tự quản lý được.</p>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Bước</th>
+              <th>Người phụ trách</th>
+              <th>Dữ liệu cần lưu</th>
+              <th>Điểm kiểm soát</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nhận lead</td>
+              <td></td>
+              <td>Nguồn, tên, SĐT</td>
+              <td>Trong 15 phút</td>
+            </tr>
+            <tr>
+              <td>Tư vấn</td>
+              <td></td>
+              <td>Nhu cầu, ngân sách</td>
+              <td>Có ghi chú</td>
+            </tr>
+            <tr>
+              <td>Follow-up</td>
+              <td></td>
+              <td>Trạng thái, hẹn lại</td>
+              <td>Không quá hạn</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="box">
+        <h3>Prompt dùng với AI</h3>
+        <p>Dán flow của bạn vào AI rồi dùng prompt này để rà lại.</p>
+        <div class="prompt">
+          Hãy đóng vai cố vấn vận hành sales cho SME. Dựa trên flow lead dưới đây, hãy chỉ ra:
+          1 điểm đang dễ mất lead, 1 dữ liệu còn thiếu, 1 bước follow-up nên thêm,
+          và viết lại flow thành phiên bản rõ hơn trong tối đa 7 bước.
+          Giọng trả lời ngắn, thực tế, không dùng từ quá corporate.
+        </div>
+      </article>
+    </section>
+
+    <section class="footer">
+      <article class="box">
+        <h3>Checklist trước khi đưa AI vào flow</h3>
+        <div class="checklist">
+          <div class="check"><span class="square"></span><span>Biết lead đang đi vào từ kênh nào.</span></div>
+          <div class="check"><span class="square"></span><span>Có người chịu trách nhiệm cho từng bước.</span></div>
+          <div class="check"><span class="square"></span><span>Có dữ liệu tối thiểu để sales làm tiếp.</span></div>
+          <div class="check"><span class="square"></span><span>Có lịch follow-up rõ, không làm theo cảm hứng.</span></div>
+          <div class="check"><span class="square"></span><span>Có nơi lưu trạng thái lead.</span></div>
+          <div class="check"><span class="square"></span><span>Chủ doanh nghiệp nhìn vào là biết flow đang kẹt ở đâu.</span></div>
+        </div>
+      </article>
+
+      <article class="box">
+        <h3>Câu chốt</h3>
+        <p>
+          AI chỉ hữu ích khi flow có nền. Nếu lead vào đâu cũng được, ai xử lý cũng được,
+          follow-up lúc nào cũng được, thì công cụ mới chỉ làm cái rối chạy nhanh hơn.
+        </p>
+        <p>
+          Bắt đầu từ một flow nhỏ, rõ, đúng quy trình thật. Sau đó mới tính đến AI Agent.
+        </p>
+        <div class="brand">AgentRocket AI</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
