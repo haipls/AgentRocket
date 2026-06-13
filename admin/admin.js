@@ -198,6 +198,31 @@ async function api(action, resource = '', payload = {}) {
     return response;
 }
 
+async function sendAdminOrderConfirmation(orderData) {
+    const customer = state.customers.find(item => String(item.id) === String(orderData.customer_id)) || {};
+    const product = state.products.find(item => String(item.id) === String(orderData.product_id)) || {};
+    const response = await fetch('/.netlify/functions/admin-order-confirmation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            order: {
+                ...orderData,
+                product_name: product.name || ''
+            },
+            customer,
+            product
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error('Không gửi được email xác nhận đơn hàng.');
+    }
+
+    return response.json();
+}
+
 async function loadAll() {
     const response = await api('list_all');
     state.products = response.data.products || [];
@@ -347,6 +372,11 @@ async function saveCurrent(event) {
     const isEdit = Boolean(state.editing);
     if (isEdit) data.id = state.editing.id;
     await api(isEdit ? 'update' : 'create', view.resource, data);
+    if (!isEdit && view.resource === 'orders') {
+        sendAdminOrderConfirmation(data).catch(error => {
+            console.error('[Admin Order Confirmation Email Error]', error);
+        });
+    }
     closeModal();
     await loadAll();
 }
