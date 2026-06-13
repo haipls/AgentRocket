@@ -305,8 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    async function sendLeadNotificationEmail(payload) {
-        const response = await fetch('/.netlify/functions/lead-notify', {
+    async function sendLeadConfirmationEmail(payload) {
+        const response = await fetch('/.netlify/functions/lead-confirmation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (!response.ok) {
-            throw new Error('Không gửi được email thông báo lead.');
+            throw new Error('Không gửi được email xác nhận cho khách.');
         }
 
         return response.json();
@@ -546,16 +546,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 await submitLeadToWebhook(payload);
-                sendLeadNotificationEmail(payload)
+                sendLeadConfirmationEmail(payload)
                     .then((result) => {
-                        trackEvent('lead_email_sent', {
+                        trackEvent('lead_confirmation_email_sent', {
                             leadId,
-                            emailId: result.id
+                            emailId: result.id,
+                            skipped: result.skipped || false
                         });
                     })
                     .catch((error) => {
-                        console.error('[Lead Email Error]', error);
-                        trackEvent('lead_email_failed', {
+                        console.error('[Lead Confirmation Email Error]', error);
+                        trackEvent('lead_confirmation_email_failed', {
                             leadId,
                             message: error.message
                         });

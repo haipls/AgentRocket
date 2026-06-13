@@ -120,8 +120,37 @@
         return result;
     }
 
+    async function sendPaymentConfirmation(pageConfig, payment, customer) {
+        const response = await fetch('/.netlify/functions/payment-confirmation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productCode: pageConfig.productCode,
+                productName: pageConfig.productName,
+                productType: pageConfig.productType || 'service',
+                amount: pageConfig.amount,
+                bankCode: pageConfig.bankCode,
+                accountNumber: pageConfig.accountNumber,
+                accountHolder: pageConfig.accountHolder,
+                orderId: payment.orderId,
+                transferContent: payment.transferContent,
+                customer,
+                pageUrl: window.location.href
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Không gửi được email xác nhận thanh toán.');
+        }
+
+        return response.json();
+    }
+
     window.AgentRocketPaymentSync = {
         setupPaymentPage,
+        sendPaymentConfirmation,
         request
     };
 }());

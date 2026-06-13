@@ -632,6 +632,8 @@
             }
 
             updatePendingStatus('Đang chờ thanh toán. Sau khi SePay ghi nhận giao dịch, link tải PDF sẽ tự mở tại đây.');
+            window.AgentRocketPaymentSync.sendPaymentConfirmation(PAYMENT_CONFIG, currentPayment, buyer)
+                .catch(error => console.error('[Payment Confirmation Email Error]', error));
             lockBuyerForm();
             const paid = await pollPaymentStatus();
             if (!paid && !paymentStatusTimer) {

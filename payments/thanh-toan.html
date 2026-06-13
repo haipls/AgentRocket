@@ -532,6 +532,8 @@
             }
 
             updatePaymentStatus('Đã tạo mã thanh toán. Vui lòng chuyển khoản đúng số tiền và nội dung ở trên.');
+            window.AgentRocketPaymentSync.sendPaymentConfirmation(PAYMENT_CONFIG, currentPayment, buyer)
+                .catch(error => console.error('[Payment Confirmation Email Error]', error));
             lockBuyerForm();
             submitButton.disabled = false;
             submitButton.textContent = 'Thanh toán';
