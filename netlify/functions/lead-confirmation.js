@@ -221,6 +221,12 @@ async function sendResendEmail(apiKey, message) {
   return body;
 }
 
+function wait(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { error: "Method not allowed" });
@@ -255,7 +261,12 @@ exports.handler = async (event) => {
   try {
     const results = [];
 
-    for (const sequence of sequences) {
+    for (let index = 0; index < sequences.length; index += 1) {
+      const sequence = sequences[index];
+      if (index > 0 && isTestMode) {
+        await wait(700);
+      }
+
       const scheduledAt = !isTestMode && sequence.delayDays
         ? addDays(now, sequence.delayDays).toISOString()
         : undefined;
