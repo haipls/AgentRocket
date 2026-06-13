@@ -305,6 +305,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    async function sendLeadNotificationEmail(payload) {
+        const response = await fetch('/.netlify/functions/lead-notify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error('Không gửi được email thông báo lead.');
+        }
+
+        return response.json();
+    }
+
     function collectFormData(form) {
         const formData = new FormData(form);
         const dataObject = {};
@@ -530,6 +546,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 await submitLeadToWebhook(payload);
+                sendLeadNotificationEmail(payload)
+                    .then((result) => {
+                        trackEvent('lead_email_sent', {
+                            leadId,
+                            emailId: result.id
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('[Lead Email Error]', error);
+                        trackEvent('lead_email_failed', {
+                            leadId,
+                            message: error.message
+                        });
+                    });
                 currentLeadId = leadId;
                 trackEvent('lead_webhook_sent', {
                     leadId,
