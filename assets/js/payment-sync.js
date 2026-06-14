@@ -86,6 +86,54 @@
         };
     }
 
+    function normalizePhone(value) {
+        return String(value || '').trim().replace(/[\s().-]/g, '');
+    }
+
+    function isValidVietnamPhone(value) {
+        const phone = normalizePhone(value);
+
+        if (/^0[3-9][0-9]{8,9}$/.test(phone)) {
+            return true;
+        }
+
+        if (/^\+84[3-9][0-9]{8,9}$/.test(phone)) {
+            return true;
+        }
+
+        return /^84[3-9][0-9]{8,9}$/.test(phone);
+    }
+
+    function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(value || '').trim());
+    }
+
+    function validateBuyerContact(form) {
+        const emailInput = form.querySelector('[name="email"]');
+        const phoneInput = form.querySelector('[name="phone"]');
+
+        if (emailInput) {
+            emailInput.setCustomValidity('');
+            if (!isValidEmail(emailInput.value)) {
+                emailInput.setCustomValidity('Vui lòng nhập email hợp lệ.');
+            }
+        }
+
+        if (phoneInput) {
+            phoneInput.setCustomValidity('');
+            if (!isValidVietnamPhone(phoneInput.value)) {
+                phoneInput.setCustomValidity('Vui lòng nhập số điện thoại Việt Nam hợp lệ.');
+            }
+        }
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return false;
+        }
+
+        return true;
+    }
+
     function setupPaymentPage(pageConfig) {
         const config = {
             ...pageConfig,
@@ -151,6 +199,7 @@
     window.AgentRocketPaymentSync = {
         setupPaymentPage,
         sendPaymentConfirmation,
+        validateBuyerContact,
         request
     };
 }());

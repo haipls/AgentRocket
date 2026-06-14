@@ -609,6 +609,9 @@
                 form.reportValidity();
                 return;
             }
+            if (!window.AgentRocketPaymentSync.validateBuyerContact(form)) {
+                return;
+            }
 
             const submitButton = document.getElementById('create-payment');
             const buyer = getBuyerFromForm();

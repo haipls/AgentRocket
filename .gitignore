@@ -1,6 +1,7 @@
 resend_config.txt
 .env
 .env.*
+!.env.example
 node_modules/
 .netlify/
 dist/
