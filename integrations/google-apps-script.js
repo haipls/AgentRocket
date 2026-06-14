@@ -533,12 +533,24 @@ function upsertPaymentCustomer(customerPayload) {
   };
 
   if (existingRow) {
+    record.registered_at = getExistingAdminCell(sheet, existingRow, 'registered_at') || record.registered_at;
     updateAdminRow(sheet, existingRow, record);
   } else {
     sheet.appendRow(buildAdminRow(sheet, record));
   }
 
   return customerId;
+}
+
+function getExistingAdminCell(sheet, rowIndex, header) {
+  const headers = getAdminHeaders(sheet);
+  const columnIndex = headers.indexOf(header) + 1;
+
+  if (columnIndex <= 0) {
+    return '';
+  }
+
+  return sheet.getRange(rowIndex, columnIndex).getValue();
 }
 
 function updateAdminRowWithoutOverwritingPaid(sheet, rowIndex, record) {
