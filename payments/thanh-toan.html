@@ -480,7 +480,8 @@
             currentPayment = window.AgentRocketPaymentSync.setupPaymentPage({
                 ...PAYMENT_CONFIG,
                 customer: buyer,
-                orderStorageKeySuffix: buyer.phone || buyer.zalo
+                orderStorageKeySuffix: buyer.phone || buyer.zalo,
+                forceNewOrder: true
             });
 
             document.getElementById('payment-area').style.display = 'block';

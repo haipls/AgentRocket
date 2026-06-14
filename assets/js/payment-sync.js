@@ -59,10 +59,20 @@
         return String(value || '').replace(/[^A-Za-z0-9]/g, '').slice(-16);
     }
 
-    function buildOrderId(productCode, storageSuffix) {
+    function buildOrderId(productCode, storageSuffix, options = {}) {
         const params = new URLSearchParams(window.location.search);
         const fromUrl = sanitize(params.get('orderId'));
         if (fromUrl) return fromUrl;
+
+        if (options.forceNew) {
+            const generated = `O${new Date().getTime().toString().slice(-10)}${Math.floor(Math.random() * 90 + 10)}`;
+            const suffix = sanitize(storageSuffix);
+            const storageKey = suffix
+                ? `agentrocket_order_${productCode}_${suffix}`
+                : `agentrocket_order_${productCode}`;
+            window.localStorage.setItem(storageKey, generated);
+            return generated;
+        }
 
         const suffix = sanitize(storageSuffix);
         const storageKey = suffix
@@ -140,7 +150,11 @@
             productType: pageConfig.productType || 'service'
         };
         const customer = config.customer || buildCustomer();
-        const orderId = buildOrderId(config.productCode, config.orderStorageKeySuffix || customer.phone || customer.zalo || customer.leadId);
+        const orderId = buildOrderId(
+            config.productCode,
+            config.orderStorageKeySuffix || customer.phone || customer.zalo || customer.leadId,
+            { forceNew: Boolean(config.forceNewOrder) }
+        );
         const transferContent = `${config.transferPrefix} ${orderId}`;
 
         config.orderId = orderId;
