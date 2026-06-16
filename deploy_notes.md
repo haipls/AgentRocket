@@ -14,6 +14,7 @@ Tạo file `.env` trên VPS:
 
 ```env
 PORT=3000
+HOST=127.0.0.1
 BRAIN_DB_PATH=/opt/agentrocket/brain.db
 ADMIN_TOKEN=thay_bang_token_admin_that
 APPS_SCRIPT_URL=https://script.google.com/macros/s/.../exec
@@ -47,9 +48,10 @@ pm2 save
 
 ## Cổng lắng nghe
 
-Server đọc cổng từ `PORT`, nếu không có thì dùng `3000`.
+Server đọc host từ `HOST`, nếu không có thì bind `127.0.0.1`. Server đọc cổng từ `PORT`, nếu không có thì dùng `3000`.
 
 ```js
+process.env.HOST || "127.0.0.1"
 process.env.PORT || 3000
 ```
 

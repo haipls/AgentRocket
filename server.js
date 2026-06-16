@@ -11,6 +11,7 @@ const resendTest = require("./netlify/functions/resend-test").handler;
 
 const app = express();
 const ROOT = __dirname;
+const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || 3000;
 const BRAIN_DB_PATH = process.env.BRAIN_DB_PATH || path.join(ROOT, "brain.db");
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "";
@@ -328,8 +329,8 @@ app.use((err, req, res, next) => {
   res.status(status).json({ ok: false, error: err.message || "Lỗi server." });
 });
 
-app.listen(PORT, () => {
-  console.log(`AgentRocket server đang chạy tại http://127.0.0.1:${PORT}`);
-  console.log(`Admin: http://127.0.0.1:${PORT}/admin`);
+app.listen(PORT, HOST, () => {
+  console.log(`AgentRocket server đang chạy tại http://${HOST}:${PORT}`);
+  console.log(`Admin: http://${HOST}:${PORT}/admin`);
   console.log(`brain.db: ${BRAIN_DB_PATH}`);
 });
