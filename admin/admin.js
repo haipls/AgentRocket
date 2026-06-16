@@ -245,7 +245,12 @@ async function localApiRequest(action, resource = '', payload = {}) {
 }
 
 async function localApiFetch(url, options = {}) {
-    const response = await fetch(url, {
+    const requestUrl = new URL(url, window.location.origin);
+    if (adminToken) {
+        requestUrl.searchParams.set('token', adminToken);
+    }
+
+    const response = await fetch(requestUrl.toString(), {
         ...options,
         headers: {
             'Content-Type': 'application/json',
