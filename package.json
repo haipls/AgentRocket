@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "build": "echo \"Static site - no build step\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "mcp:start": "node mcp/server.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "better-sqlite3": "^11.8.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

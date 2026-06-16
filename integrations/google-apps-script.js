@@ -119,6 +119,10 @@ function doPost(e) {
 }
 
 function doGet(e) {
+  if (e && e.parameter && e.parameter.mcp === '1') {
+    return handleMcpRequest(e);
+  }
+
   if (e && e.parameter && e.parameter.admin === '1') {
     return handleAdminRequest(e);
   }
@@ -1137,4 +1141,468 @@ function jsonResponse(data) {
   return ContentService
     .createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function handleMcpRequest(e) {
+  try {
+    assertMcpConfigured(e);
+
+    const action = e.parameter.action || '';
+    const payload = parseAdminPayload(e.parameter.payload);
+
+    if (action === 'get_daily_business_summary') {
+      return jsonResponse({
+        ok: true,
+        data: getMcpDailyBusinessSummary(payload)
+      });
+    }
+
+    if (action === 'list_new_leads') {
+      return jsonResponse({
+        ok: true,
+        data: listMcpNewLeads(payload)
+      });
+    }
+
+    if (action === 'get_payment_and_order_status') {
+      return jsonResponse({
+        ok: true,
+        data: getMcpPaymentAndOrderStatus(payload)
+      });
+    }
+
+    throw new Error('Action MCP không hợp lệ: ' + action);
+  } catch (error) {
+    return jsonResponse({
+      ok: false,
+      error: error.message
+    });
+  }
+}
+
+function assertMcpConfigured(e) {
+  if (!SHEET_ID || SHEET_ID === '0') {
+    throw new Error('Thiếu SHEET_ID Google Sheet thật cho MCP.');
+  }
+
+  if (!SHEET_NAME) {
+    throw new Error('Thiếu SHEET_NAME Google Sheet thật cho MCP.');
+  }
+
+  if (!ADMIN_TOKEN) {
+    throw new Error('Thiếu ADMIN_TOKEN để bảo vệ MCP Apps Script action.');
+  }
+
+  if ((e.parameter.token || '') !== ADMIN_TOKEN) {
+    throw new Error('Token MCP không hợp lệ.');
+  }
+}
+
+function getMcpDailyBusinessSummary(payload) {
+  const dateText = normalizeMcpDate(payload.date || mcpTodayText());
+  const leads = filterMcpLeadsByDate(getMcpLeadRecords(), dateText, dateText, payload.status || 'all');
+  const adminData = listAdminData();
+  const orders = adminData.orders || [];
+  const ordersOnDate = orders.filter(function (order) {
+    return mcpDateTextFromValue(order.purchased_at) === dateText || mcpDateTextFromValue(order.paid_at) === dateText;
+  });
+  const statusCounts = countMcpByField(ordersOnDate, 'order_status');
+  const paidOrders = ordersOnDate.filter(function (order) {
+    return order.order_status === 'paid';
+  });
+  const pendingOrders = ordersOnDate.filter(function (order) {
+    return order.order_status === 'pending_payment' || order.order_status === 'new';
+  });
+  const paidRevenue = paidOrders.reduce(function (sum, order) {
+    return sum + parseAdminNumber(order.amount);
+  }, 0);
+  const attentionItems = [];
+
+  leads.slice(0, 5).forEach(function (lead) {
+    attentionItems.push({
+      type: 'lead',
+      message: 'Lead mới: ' + (lead.fullname || 'Không tên') + ' - ' + (lead.company || 'Chưa có doanh nghiệp'),
+      lead_id: lead.lead_id
+    });
+  });
+
+  pendingOrders.slice(0, 5).forEach(function (order) {
+    attentionItems.push({
+      type: 'order',
+      message: 'Đơn cần theo dõi: ' + order.id + ' - ' + (order.customer_name || 'Khách chưa rõ') + ' - ' + formatMcpVnd(order.amount),
+      order_id: order.id
+    });
+  });
+
+  return {
+    date: dateText,
+    source: 'google_sheets',
+    lead_count: leads.length,
+    order_count: ordersOnDate.length,
+    order_status_counts: statusCounts,
+    paid_order_count: paidOrders.length,
+    pending_order_count: pendingOrders.length,
+    paid_revenue: paidRevenue,
+    paid_revenue_text: formatMcpVnd(paidRevenue),
+    attention_items: attentionItems.slice(0, 5)
+  };
+}
+
+function listMcpNewLeads(payload) {
+  const fromDate = normalizeMcpDate(payload.from_date || payload.date || mcpTodayText());
+  const toDate = normalizeMcpDate(payload.to_date || payload.date || fromDate);
+  const status = payload.status || 'all';
+  const limit = normalizeMcpLimit(payload.limit, 10, 50);
+  const leads = filterMcpLeadsByDate(getMcpLeadRecords(), fromDate, toDate, status);
+
+  return {
+    source: 'google_sheets',
+    from_date: fromDate,
+    to_date: toDate,
+    status: status,
+    total: leads.length,
+    leads: leads.slice(0, limit)
+  };
+}
+
+function getMcpPaymentAndOrderStatus(payload) {
+  const orderId = payload.order_id ? String(payload.order_id).trim() : '';
+  const status = payload.status || 'all';
+  const limit = normalizeMcpLimit(payload.limit, 10, 50);
+  const adminData = listAdminData();
+  let orders = adminData.orders || [];
+
+  if (orderId) {
+    const found = orders.filter(function (order) {
+      return String(order.id) === orderId;
+    })[0];
+
+    if (!found) {
+      return {
+        source: 'google_sheets',
+        order_id: orderId,
+        found: false,
+        message: 'Không tìm thấy đơn hàng.'
+      };
+    }
+
+    return {
+      source: 'google_sheets',
+      order_id: orderId,
+      found: true,
+      order: compactMcpOrder(found)
+    };
+  }
+
+  if (status !== 'all') {
+    orders = orders.filter(function (order) {
+      return String(order.order_status || '') === status;
+    });
+  }
+
+  const totalAmount = orders.reduce(function (sum, order) {
+    return sum + parseAdminNumber(order.amount);
+  }, 0);
+
+  return {
+    source: 'google_sheets',
+    status: status,
+    total: orders.length,
+    total_amount: totalAmount,
+    total_amount_text: formatMcpVnd(totalAmount),
+    orders: orders.slice(0, limit).map(compactMcpOrder)
+  };
+}
+
+function getMcpLeadRecords() {
+  const sheet = getLeadSheet();
+  ensureHeaderRow(sheet);
+  const headers = getHeaders(sheet);
+  const lastRow = sheet.getLastRow();
+
+  if (lastRow < 2) {
+    return [];
+  }
+
+  return sheet
+    .getRange(2, 1, lastRow - 1, headers.length)
+    .getValues()
+    .filter(function (row) {
+      return row.some(function (value) {
+        return value !== '';
+      });
+    })
+    .map(function (row) {
+      const record = rowToObject(headers, row);
+      return compactMcpLead(record);
+    })
+    .reverse();
+}
+
+function compactMcpLead(record) {
+  return {
+    lead_id: record['Lead ID'] || '',
+    status: record['Trạng thái'] || '',
+    submitted_at: record['Thời gian gửi'] || '',
+    source: record['Nguồn'] || '',
+    page_url: record['URL trang'] || '',
+    fullname: record['Họ và tên'] || '',
+    company: record['Doanh nghiệp'] || '',
+    phone: record['Số điện thoại'] || '',
+    email_or_zalo: record['Email hoặc Zalo'] || '',
+    industry: record['Ngành'] || '',
+    size: record['Quy mô'] || '',
+    revenue: record['Doanh thu'] || '',
+    leads_monthly: record['Lead mỗi tháng'] || '',
+    pain: record['Vấn đề chính'] || '',
+    roi_net: record['ROI - ROI ròng'] || '',
+    lead_channel: record['Khảo sát - Kênh lead chính'] || '',
+    lead_storage: record['Khảo sát - Nơi lưu lead'] || '',
+    first_ai_task: record['Khảo sát - Tác vụ AI ưu tiên'] || '',
+    readiness: record['Khảo sát - Mức độ sẵn sàng'] || ''
+  };
+}
+
+function compactMcpOrder(order) {
+  return {
+    id: order.id || '',
+    customer_id: order.customer_id || '',
+    customer_name: order.customer_name || '',
+    product_id: order.product_id || '',
+    product_name: order.product_name || '',
+    product_type: order.product_type || '',
+    amount: parseAdminNumber(order.amount),
+    amount_text: formatMcpVnd(order.amount),
+    order_status: order.order_status || '',
+    payment_content: order.payment_content || '',
+    product_code: order.product_code || '',
+    source_url: order.source_url || '',
+    purchased_at: order.purchased_at || '',
+    paid_at: order.paid_at || '',
+    gateway: order.gateway || '',
+    gateway_transaction_id: order.gateway_transaction_id || ''
+  };
+}
+
+function filterMcpLeadsByDate(leads, fromDate, toDate, status) {
+  return leads.filter(function (lead) {
+    const leadDate = mcpDateTextFromValue(lead.submitted_at);
+    const statusMatches = status === 'all' || String(lead.status || '') === status;
+    return statusMatches && leadDate >= fromDate && leadDate <= toDate;
+  });
+}
+
+function countMcpByField(records, field) {
+  return records.reduce(function (result, record) {
+    const key = record[field] || 'unknown';
+    result[key] = (result[key] || 0) + 1;
+    return result;
+  }, {});
+}
+
+function normalizeMcpDate(value) {
+  const text = String(value || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    throw new Error('Ngày phải có định dạng YYYY-MM-DD.');
+  }
+  return text;
+}
+
+function normalizeMcpLimit(value, fallback, maxValue) {
+  const number = Number(value || fallback);
+  if (!Number.isFinite(number) || number <= 0) {
+    return fallback;
+  }
+  return Math.min(Math.floor(number), maxValue);
+}
+
+function mcpTodayText() {
+  return Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
+}
+
+function mcpDateTextFromValue(value) {
+  if (!value) {
+    return '';
+  }
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
+  }
+
+  const text = String(value).trim();
+  const isoMatch = text.match(/^(\d{4}-\d{2}-\d{2})/);
+  if (isoMatch) {
+    return isoMatch[1];
+  }
+
+  const viMatch = text.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+  if (viMatch) {
+    return viMatch[3] + '-' + viMatch[2] + '-' + viMatch[1];
+  }
+
+  return '';
+}
+
+function formatMcpVnd(value) {
+  return new Intl.NumberFormat('vi-VN').format(parseAdminNumber(value)) + 'đ';
+}
+
+const PAYMENT_SHEET_NAME = 'Payment';
+
+const PAYMENT_COLUMNS = {
+  bank: 'Ngân hàng',
+  transactionDate: 'Ngày giao dịch',
+  accountNumber: 'Số tài khoản',
+  subAccount: 'Tài khoản phụ',
+  paymentCode: 'Code TT',
+  content: 'Nội dung thanh toán',
+  type: 'Loại',
+  amount: 'Số tiền',
+  referenceId: 'Mã tham chiếu',
+  balance: 'Lũy kế'
+};
+
+function syncPaymentsFromSheet() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    const paymentSheet = spreadsheet.getSheetByName(PAYMENT_SHEET_NAME);
+
+    if (!paymentSheet) {
+      throw new Error('Không tìm thấy tab Payment.');
+    }
+
+    const headers = getHeaders(paymentSheet);
+    const lastRow = paymentSheet.getLastRow();
+
+    if (lastRow < 2) {
+      return {
+        ok: true,
+        message: 'Chưa có giao dịch trong tab Payment.'
+      };
+    }
+
+    ensurePaymentProcessedColumns(paymentSheet);
+
+    const updatedHeaders = getHeaders(paymentSheet);
+    const processedColumn = updatedHeaders.indexOf('Đã xử lý') + 1;
+    const processedAtColumn = updatedHeaders.indexOf('Xử lý lúc') + 1;
+    const resultColumn = updatedHeaders.indexOf('Kết quả xử lý') + 1;
+
+    const values = paymentSheet
+      .getRange(2, 1, lastRow - 1, updatedHeaders.length)
+      .getValues();
+
+    let paidCount = 0;
+    let skippedCount = 0;
+    let errorCount = 0;
+
+    values.forEach(function (row, index) {
+      const rowIndex = index + 2;
+      const record = rowToObject(updatedHeaders, row);
+
+      if (String(record['Đã xử lý'] || '').toLowerCase() === 'yes') {
+        skippedCount++;
+        return;
+      }
+
+      const content = String(record[PAYMENT_COLUMNS.content] || '');
+      const paymentCode = String(record[PAYMENT_COLUMNS.paymentCode] || '');
+      const combinedContent = [paymentCode, content].join(' ');
+      const orderId = extractOrderIdFromContent(combinedContent);
+
+      if (!orderId) {
+        paymentSheet.getRange(rowIndex, resultColumn).setValue('Bỏ qua: không tìm thấy mã đơn O...');
+        skippedCount++;
+        return;
+      }
+
+      const amount = parseAdminNumber(record[PAYMENT_COLUMNS.amount]);
+      const referenceId = String(record[PAYMENT_COLUMNS.referenceId] || '');
+      const paidAt = String(record[PAYMENT_COLUMNS.transactionDate] || normalizeAdminDateTime(''));
+
+      try {
+        markOrderPaidFromPaymentSheet({
+          orderId: orderId,
+          amount: amount,
+          content: content,
+          paymentCode: paymentCode,
+          referenceId: referenceId,
+          paidAt: paidAt,
+          raw: record
+        });
+
+        paymentSheet.getRange(rowIndex, processedColumn).setValue('yes');
+        paymentSheet.getRange(rowIndex, processedAtColumn).setValue(normalizeAdminDateTime(''));
+        paymentSheet.getRange(rowIndex, resultColumn).setValue('Đã cập nhật paid cho đơn ' + orderId);
+
+        paidCount++;
+      } catch (error) {
+        paymentSheet.getRange(rowIndex, resultColumn).setValue('Lỗi: ' + error.message);
+        errorCount++;
+      }
+    });
+
+    return {
+      ok: true,
+      paidCount: paidCount,
+      skippedCount: skippedCount,
+      errorCount: errorCount
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function ensurePaymentProcessedColumns(sheet) {
+  const headers = getHeaders(sheet);
+  const requiredHeaders = ['Đã xử lý', 'Xử lý lúc', 'Kết quả xử lý'];
+  const missingHeaders = requiredHeaders.filter(function (header) {
+    return headers.indexOf(header) === -1;
+  });
+
+  if (missingHeaders.length > 0) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missingHeaders.length)
+      .setValues([missingHeaders]);
+  }
+}
+
+function markOrderPaidFromPaymentSheet(payment) {
+  const orderId = payment.orderId;
+  const amount = payment.amount;
+  const content = payment.content || '';
+  const paymentCode = payment.paymentCode || '';
+  const referenceId = payment.referenceId || '';
+  const paidAt = payment.paidAt || normalizeAdminDateTime('');
+
+  const sheet = getAdminSheet('orders');
+  const rowIndex = findAdminRowById(sheet, orderId);
+
+  if (!rowIndex) {
+    throw new Error('Không tìm thấy đơn hàng ứng với mã: ' + orderId);
+  }
+
+  assertWebhookAmountMatches(sheet, rowIndex, amount);
+
+  const record = {
+    id: orderId,
+    amount: amount || '',
+    order_status: 'paid',
+    payment_content: [paymentCode, content].join(' ').trim(),
+    paid_at: paidAt,
+    gateway: 'sepay_google_sheets',
+    gateway_transaction_id: referenceId,
+    gateway_raw: JSON.stringify(payment.raw || {})
+  };
+
+  updateAdminRow(sheet, rowIndex, record);
+  notifyTelegramPaymentPaid(orderId, amount, record.payment_content);
+
+  return {
+    orderId: orderId,
+    status: 'paid'
+  };
 }
