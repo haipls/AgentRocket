@@ -15,6 +15,7 @@ if (adminUrlToken) {
 }
 
 const adminToken = adminUrlToken || window.localStorage.getItem('agentrocket_admin_token') || adminConfig.adminToken || '';
+const useLocalApi = adminConfig.useLocalApi === true || !!adminConfig.apiBaseUrl;
 
 const views = {
     products: {
@@ -193,9 +194,72 @@ function appsScriptRequest(action, resource = '', data = {}) {
 }
 
 async function api(action, resource = '', payload = {}) {
+    if (useLocalApi) {
+        return localApiRequest(action, resource, payload);
+    }
+
     const response = await appsScriptRequest(action, resource, payload);
     if (!response.ok) throw new Error(response.error || 'API lỗi.');
     return response;
+}
+
+async function localApiRequest(action, resource = '', payload = {}) {
+    const baseUrl = adminConfig.apiBaseUrl || '/api';
+
+    if (action === 'list_all') {
+        const [products, customers, orders] = await Promise.all([
+            localApiFetch(`${baseUrl}/products`),
+            localApiFetch(`${baseUrl}/customers`),
+            localApiFetch(`${baseUrl}/orders`),
+        ]);
+
+        return {
+            ok: true,
+            data: {
+                products: products.data || [],
+                customers: customers.data || [],
+                orders: orders.data || [],
+            },
+        };
+    }
+
+    const methodMap = {
+        create: 'POST',
+        update: 'PUT',
+        delete: 'DELETE',
+    };
+    const method = methodMap[action];
+
+    if (!method || !resource) {
+        throw new Error('API local không hỗ trợ thao tác này.');
+    }
+
+    const id = payload && payload.id ? `/${encodeURIComponent(payload.id)}` : '';
+    const body = { ...payload };
+    delete body.id;
+
+    return localApiFetch(`${baseUrl}/${resource}${method === 'POST' ? '' : id}`, {
+        method,
+        body: method === 'DELETE' ? undefined : JSON.stringify(body),
+    });
+}
+
+async function localApiFetch(url, options = {}) {
+    const response = await fetch(url, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...(adminToken ? { 'x-admin-token': adminToken } : {}),
+            ...(options.headers || {}),
+        },
+    });
+    const data = await response.json();
+
+    if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'API local lỗi.');
+    }
+
+    return data;
 }
 
 async function sendAdminOrderConfirmation(orderData) {

@@ -2,6 +2,9 @@ resend_config.txt
 .env
 .env.*
 !.env.example
+brain.db
+*.db
+*.db.bak
 node_modules/
 .netlify/
 dist/
