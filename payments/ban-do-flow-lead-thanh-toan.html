@@ -438,7 +438,7 @@
                 </div>
 
                 <p class="payment-footnote">
-                    Trang sẽ tự kiểm tra trạng thái thanh toán qua Apps Script và Google Sheets.
+                    Trang sẽ tự kiểm tra trạng thái thanh toán qua API và brain.db trên VPS.
                     Nếu đã chuyển khoản mà chưa thấy link tải, vui lòng chờ thêm 30-60 giây.
                 </p>
             </aside>
@@ -622,7 +622,7 @@
 
             const response = await startPaymentSession(buyer);
             if (response.skipped) {
-                updatePendingStatus('Chưa cấu hình Apps Script URL nên chưa thể tạo đơn thanh toán.');
+                updatePendingStatus('Chưa cấu hình API thanh toán nên chưa thể tạo đơn thanh toán.');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Thanh toán';
                 return;

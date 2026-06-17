@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const HOST = process.env.MCP_HOST || "127.0.0.1";
 const PORT = Number(process.env.MCP_PORT || 3001);
-const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || "";
+const SERVER_API_BASE_URL = process.env.SERVER_API_BASE_URL || "http://127.0.0.1:3000";
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "";
 
 const app = express();
@@ -41,8 +41,8 @@ function toolResult(payload) {
 }
 
 function assertConfigured() {
-  if (!APPS_SCRIPT_URL) {
-    throw new Error("Thiếu APPS_SCRIPT_URL trong môi trường MCP.");
+  if (!SERVER_API_BASE_URL) {
+    throw new Error("Thiếu SERVER_API_BASE_URL trong môi trường MCP.");
   }
 
   if (!ADMIN_TOKEN) {
@@ -50,22 +50,16 @@ function assertConfigured() {
   }
 }
 
-function encodePayload(data) {
-  return Buffer.from(JSON.stringify(data || {}), "utf8")
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-
-async function callAppsScript(action, payload) {
+async function callServerApi(path, params) {
   assertConfigured();
 
-  const url = new URL(APPS_SCRIPT_URL);
-  url.searchParams.set("mcp", "1");
+  const url = new URL(path, SERVER_API_BASE_URL);
   url.searchParams.set("token", ADMIN_TOKEN);
-  url.searchParams.set("action", action);
-  url.searchParams.set("payload", encodePayload(payload));
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
 
   const response = await fetch(url, {
     method: "GET",
@@ -78,15 +72,15 @@ async function callAppsScript(action, payload) {
   try {
     body = JSON.parse(text);
   } catch (error) {
-    throw new Error(`Apps Script trả response không phải JSON: ${text.slice(0, 200)}`);
+    throw new Error(`Server API trả response không phải JSON: ${text.slice(0, 200)}`);
   }
 
   if (!response.ok || !body.ok) {
-    throw new Error(body.error || `Apps Script lỗi HTTP ${response.status}`);
+    throw new Error(body.error || `Server API lỗi HTTP ${response.status}`);
   }
 
   if (body.data === undefined) {
-    throw new Error("Apps Script chưa trả data cho action MCP. Cần deploy lại Apps Script Web App với code mới.");
+    throw new Error("Server API chưa trả data cho MCP.");
   }
 
   return body.data;
@@ -144,17 +138,17 @@ function createMcpServer() {
     "get_daily_business_summary",
     {
       title: "AgentRocket daily business summary",
-      description: "Tổng hợp lead, đơn hàng, doanh thu và việc cần chú ý trong ngày từ Apps Script/Google Sheets.",
+      description: "Tổng hợp lead, đơn hàng, doanh thu và việc cần chú ý trong ngày từ brain.db trên VPS.",
       inputSchema: {
         date: z.string().optional().describe("Ngày cần xem theo YYYY-MM-DD, mặc định là hôm nay GMT+7."),
-        source: z.literal("google_sheets").optional().describe("Nguồn dữ liệu, hiện hỗ trợ google_sheets."),
+        source: z.literal("brain_db").optional().describe("Nguồn dữ liệu, hiện hỗ trợ brain_db."),
       },
     },
     async (args) => runTool("get_daily_business_summary", args, async (input) => {
       const date = validateDate(input.date || todayInVietnam(), "date");
-      return callAppsScript("get_daily_business_summary", {
+      return callServerApi("/api/mcp/daily-business-summary", {
         date,
-        source: "google_sheets",
+        source: "brain_db",
       });
     })
   );
@@ -163,7 +157,7 @@ function createMcpServer() {
     "list_new_leads",
     {
       title: "List AgentRocket new leads",
-      description: "Liệt kê lead mới từ Google Sheets theo khoảng ngày, trạng thái và limit.",
+      description: "Liệt kê lead mới từ brain.db theo khoảng ngày, trạng thái và limit.",
       inputSchema: {
         from_date: z.string().optional().describe("Ngày bắt đầu theo YYYY-MM-DD, mặc định là hôm nay GMT+7."),
         to_date: z.string().optional().describe("Ngày kết thúc theo YYYY-MM-DD, mặc định bằng from_date."),
@@ -179,7 +173,7 @@ function createMcpServer() {
         throw new Error("to_date không được nhỏ hơn from_date.");
       }
 
-      return callAppsScript("list_new_leads", {
+      return callServerApi("/api/mcp/new-leads", {
         from_date: fromDate,
         to_date: toDate,
         status: input.status || "all",
@@ -192,7 +186,7 @@ function createMcpServer() {
     "get_payment_and_order_status",
     {
       title: "Get AgentRocket payment and order status",
-      description: "Kiểm tra một đơn hàng hoặc liệt kê đơn hàng theo trạng thái từ Google Sheets.",
+      description: "Kiểm tra một đơn hàng hoặc liệt kê đơn hàng theo trạng thái từ brain.db trên VPS.",
       inputSchema: {
         order_id: z.string().optional().describe("Mã đơn cần kiểm tra, ví dụ O..."),
         status: z.string().optional().describe("Trạng thái đơn: pending_payment, paid, processing, done, cancelled hoặc all."),
@@ -212,7 +206,7 @@ function createMcpServer() {
         throw new Error(`status không hợp lệ. Cho phép: ${allowedStatuses.join(", ")}.`);
       }
 
-      return callAppsScript("get_payment_and_order_status", {
+      return callServerApi("/api/mcp/payment-order-status", {
         order_id: orderId,
         status,
         limit: normalizeLimit(input.limit),
@@ -230,7 +224,8 @@ app.get("/health", (req, res) => {
     transport: "streamable-http",
     host: HOST,
     port: PORT,
-    appsScriptConfigured: Boolean(APPS_SCRIPT_URL),
+    serverApiConfigured: Boolean(SERVER_API_BASE_URL),
+    source: "brain_db",
   });
 });
 

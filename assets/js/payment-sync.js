@@ -12,11 +12,35 @@
     }
 
     function request(action, data) {
+        if (syncConfig.apiBaseUrl) {
+            return requestLocalApi(action, data);
+        }
+
         if (syncConfig.appsScriptUrl) {
             return requestAppsScript(action, data);
         }
 
-        return Promise.resolve({ ok: false, skipped: true, error: 'Chưa cấu hình Apps Script URL.' });
+        return Promise.resolve({ ok: false, skipped: true, error: 'Chưa cấu hình API thanh toán.' });
+    }
+
+    async function requestLocalApi(action, data) {
+        const response = await fetch(`${syncConfig.apiBaseUrl}/${action}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data || {})
+        });
+        const body = await response.json().catch(() => ({}));
+
+        if (!response.ok || !body.ok) {
+            return {
+                ok: false,
+                error: body.error || 'API thanh toán local lỗi.'
+            };
+        }
+
+        return body;
     }
 
     function requestAppsScript(action, data) {

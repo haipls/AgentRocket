@@ -1,13 +1,20 @@
 # AgentRocket MCP Server
 
-MCP server cho GoClaw agent gọi dữ liệu vận hành AgentRocket qua Apps Script/Google Sheets.
+MCP server cho GoClaw agent gọi dữ liệu vận hành AgentRocket từ `brain.db` trên VPS.
 
 ## Transport
 
 - Transport: `streamable-http`
-- URL nội bộ: `http://127.0.0.1:3001/mcp`
+- URL nội bộ mặc định: `http://127.0.0.1:3001/mcp`
 - Health check: `http://127.0.0.1:3001/health`
-- Bind mặc định: `127.0.0.1`, không public ra internet.
+- Nguồn dữ liệu: `brain.db`, thông qua API nội bộ của website.
+
+Nếu GoClaw chạy trong Docker và dashboard chặn private IP, dùng Caddy reverse proxy public có header bảo vệ:
+
+```text
+https://rocket.vungkiemtien.com/mcp
+X-AgentRocket-MCP-Token: <token trong Caddyfile>
+```
 
 ## Environment
 
@@ -16,11 +23,12 @@ Server dùng chung `.env` ở root repo:
 ```env
 MCP_HOST=127.0.0.1
 MCP_PORT=3001
-APPS_SCRIPT_URL=https://script.google.com/macros/s/.../exec
+SERVER_API_BASE_URL=http://127.0.0.1:3000
 ADMIN_TOKEN=...
+BRAIN_DB_PATH=/opt/agentrocket/brain.db
 ```
 
-`APPS_SCRIPT_URL` phải trỏ tới Apps Script Web App đã deploy code có `?mcp=1`.
+`ADMIN_TOKEN` phải giống token website dùng để bảo vệ `/api`.
 
 ## Run
 
@@ -35,36 +43,14 @@ npm run mcp:start
 - `list_new_leads`
 - `get_payment_and_order_status`
 
-Nguồn dữ liệu của 3 tool này là Apps Script/Google Sheets.
-
-## GoClaw Config
-
-Thêm MCP server vào `config.json` của GoClaw:
-
-```json
-{
-  "tools": {
-    "mcp_servers": {
-      "agentrocket": {
-        "transport": "streamable-http",
-        "url": "http://127.0.0.1:3001/mcp",
-        "tool_prefix": "agentrocket_",
-        "timeout_sec": 30,
-        "enabled": true
-      }
-    }
-  }
-}
-```
-
-Sau đó restart GoClaw hoặc reconnect MCP server trong dashboard, rồi grant server cho agent cần dùng.
+Ba tool này đọc dữ liệu từ `brain.db`, không gọi Apps Script/Google Sheets.
 
 ## systemd sample
 
 ```ini
 [Unit]
 Description=AgentRocket MCP server
-After=network.target
+After=network.target agentrocket.service
 
 [Service]
 Type=simple

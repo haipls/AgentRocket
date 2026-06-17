@@ -33,7 +33,7 @@ const views = {
     },
     customers: {
         title: 'Khách hàng',
-        desc: 'Danh sách khách hàng trong Google Sheets.',
+        desc: 'Danh sách khách hàng trong brain.db trên VPS.',
         resource: 'customers',
         columns: [
             ['id', 'ID'],

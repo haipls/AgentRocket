@@ -522,7 +522,7 @@
 
             const response = await startPaymentSession(buyer);
             if (response.skipped) {
-                updatePaymentStatus('Chưa cấu hình Apps Script URL nên chưa thể tạo đơn thanh toán.');
+                updatePaymentStatus('Chưa cấu hình API thanh toán nên chưa thể tạo đơn thanh toán.');
                 submitButton.disabled = false;
                 submitButton.textContent = 'Thanh toán';
                 return;

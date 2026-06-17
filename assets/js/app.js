@@ -295,14 +295,20 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error('Thiếu AGENTROCKET_LEAD_WEBHOOK_URL trong lead-config.js');
         }
 
-        await fetch(leadWebhookUrl, {
+        const response = await fetch(leadWebhookUrl, {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         });
+
+        if (!response.ok) {
+            const data = await response.json().catch(() => ({}));
+            throw new Error(data.error || 'Không lưu được lead vào brain.db.');
+        }
+
+        return response.json();
     }
 
     async function sendLeadConfirmationEmail(payload) {
